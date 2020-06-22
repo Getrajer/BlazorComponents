@@ -1,5 +1,21 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+input:focus{
+    outline:unset;
+    border:unset;
+}
+
+button:focus {
+    outline: unset;
+    border: unset;
+}
+
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }

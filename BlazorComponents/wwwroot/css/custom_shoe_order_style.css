@@ -3,7 +3,6 @@
     margin: 0;
 }
 
-
 .component{
     display:flex;
     justify-content:center;
@@ -145,7 +144,6 @@ button:focus{
         color: white;
     }
 
-
 [type="radio"] {
     position: absolute;
     opacity: 0;
@@ -168,7 +166,6 @@ button:focus{
         background-color:#5489f6;
         color: black;
     }
-
 
 .colorBox{
     width:35px;
@@ -203,7 +200,7 @@ button:focus{
 .svg_container {
     position: relative;
     width:100%;
-    max-width: 500px;
+    max-width: 650px;
 }
 
 .svg {
@@ -212,7 +209,8 @@ button:focus{
 }
 
 .product_img {
-    width: 100%;
+    width: 500px;
+    height: auto;
 }
 
 .product_description {
@@ -229,7 +227,6 @@ p {
     font-weight: 900;
     font-size: 1rem;
 }
-
 
 .product_description h3 {
     font-size: 1.5rem;
@@ -298,14 +295,12 @@ p {
 }
 /*End of scheme 1*/
 
-
 /*Scheme 2 style*/
 #Scheme_2 .item_card {
     background: rgb(75,39,74);
     background: linear-gradient(0deg, rgba(75,39,74,1) 24%, rgba(138,43,148,1) 65%, rgba(164,56,152,1) 90%);
     color: #f0f4fc;
 }
-
 
 #Scheme_2 .buy_button_container button {
     color: black;
@@ -316,7 +311,6 @@ p {
     background-color: #ffffff;
 }
 /*End of scheme 2*/
-
 
 /*Scheme 2 style*/
 #Scheme_3 .item_card {
@@ -352,10 +346,32 @@ p {
 }
 /*End of scheme 2*/
 
-
 .bought_poduct{
     width:100%;
     text-align:center;
     padding: 2em 1em;
     font-size:1.3rem;
+}
+
+/*Mediaquery*/
+@media screen and (max-width:1200px){
+    .component .component_container {
+        width: 100%;
+        max-width: 1000px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 3em;
+    }
+
+    .functional{
+        display:flex;
+        justify-content:center;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .product_img {
+        width: 300px;
+        height: auto;
+    }
 }

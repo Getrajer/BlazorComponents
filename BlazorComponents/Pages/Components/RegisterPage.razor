@@ -1,4 +1,6 @@
 ﻿@page "/RegisterPage"
+@using System.Text.RegularExpressions
+@using System.Net.Mail
 
 <head>
     <link rel="stylesheet" href="../css/register_page_style.css" />
@@ -102,11 +104,11 @@
                 </div>
 
                 <div class="description">
-                    <p>This is custom login page. </p>
+                    <p>This is custom register page. </p>
 
-                    <p>Person who manages website is able to change login methods to the website as well design of the login page.</p>
+                    <p>Person who would will manage website is able to change color scheme. Can as well change password validation rules and if user needs to give address or phone number.</p>
 
-                    <p>User when logging in with Sms method would recieve numeric one time code. User when logging in with Pin would have to remember pin number. Both methods can be implemented.</p>
+                    <p>User of the page can create account. Input of the user is going to be validated by server and if evrything is going to be fine user is going to be added to database. </p>
                 </div>
 
                 <div class="options">
@@ -417,7 +419,7 @@
     /// </summary>
     public void ChangeIfNeedsAddress()
     {
-        if(needs_address == false)
+        if (needs_address == false)
         {
             needs_address = true;
             address_string_btn = "Remove";
@@ -457,9 +459,10 @@
     /// </summary>
     public void ChangeUniquePassword()
     {
-        if(unique_char <= 5 && unique_char >= 0)
+        if (unique_char <= 5 && unique_char >= 0)
         {
             new_register.NumberOfPasswordUniqueChar = unique_char;
+
         }
     }
 
@@ -479,33 +482,168 @@
     /// </summary>
     public void Register()
     {
+
+
+        //Reset errors
         user_name_error = "";
+        name_error = "";
+        last_name_error = "";
+        address_error = "";
+        post_code_error = "";
+        city_error = "";
+        country_error = "";
+        phone_number_error = "";
+        email_error = "";
         password_error = "";
+        password_confirmation_error = "";
+
 
         bool is_error = false;
 
-        if(user_name == "")
+        if (name == "")
+        {
+            is_error = true;
+            name_error = "Please enter your name";
+        }
+
+        if (last_name == "")
+        {
+            is_error = true;
+            last_name_error = "Please enter your last name";
+        }
+
+        if (user_name == "")
         {
             is_error = true;
             user_name_error = "Please enter user name!";
         }
-
-        if(user_name != example_account.UserName || password != example_account.Password)
+        else if (user_name.Length < 5)
         {
             is_error = true;
-            password_error = "Wrong password or user name!";
+            user_name_error = "User name needs to be at least 5 char long";
         }
 
-        if(is_error == false)
+        //If address is requred
+        if (needs_address == true)
         {
-            logged_in_status = "You logged in to the account";
+            if (city == "")
+            {
+                city_error = "Please enter your city";
+                is_error = true;
+            }
+            else
+            {
+                //Here some function connected to database of all citirs should validate city
+            }
 
-            user_name = "";
-            password = "";
+            if (country == "")
+            {
+                country_error = "Please enter your country";
+                is_error = true;
+            }
+
+            if (address == "")
+            {
+                address_error = "Please enter your address";
+                is_error = true;
+            }
+
+            if (post_code == "")
+            {
+                post_code_error = "Please enter postcode";
+                is_error = true;
+            }
+            else
+            {
+                //Here some function connected to database of all post codes should validate post code
+            }
+        }
+
+        if(email == "")
+        {
+            email_error = "Please enter your email address";
+            is_error = true;
         }
         else
         {
-            logged_in_status = "Something went wrong with login";
+            bool isEmailTrue = IsValidEmail(email);
+
+            if (isEmailTrue != true)
+            {
+                email_error = "Wrong email address";
+                is_error = true;
+            }
+        }
+
+        //If phone number is reequired
+        if(new_register.RequiresPhoneNumber == true)
+        {
+            if(phone_number == "")
+            {
+                phone_number_error = "Please enter your phone number";
+                is_error = true;
+            }
+            else
+            {
+                bool isValidPhoneNumber = IsPhoneNumber(phone_number);
+
+                if (isValidPhoneNumber != true)
+                {
+                    phone_number_error = "Wrong phone number";
+                    is_error = true;
+                }
+            }
+        }
+
+        if(password == "")
+        {
+            password_error = "Please enter your password";
+            is_error = true;
+        }
+        else
+        {
+            bool isValidPassword = IsValidPassword(password);
+
+            if(isValidPassword == true)
+            {
+                if(password != password_confirmation)
+                {
+                    password_confirmation_error = "Passwords are not equal";
+                    is_error = true;
+                }
+            }
+            else
+            {
+                password_confirmation_error = "Wrong password";
+                is_error = true;
+            }
+        }
+
+        if (is_error == false)
+        {
+            logged_in_status = "You heave created account";
+
+            name = "";
+            last_name = "";
+            address = "";
+            post_code = "";
+            city = "";
+            country = "";
+            phone_number = "";
+            email = "";
+            user_name = "";
+            password = "";
+            password_confirmation = "";
+
+            //Assign variables to the new user object
+
+            //Return new user object and add it to data base
+            //return account
+
+        }
+        else
+        {
+            logged_in_status = "Something went wrong with registering";
         }
 
     }
@@ -528,5 +666,82 @@
         }
     }
 
+
+    #region Help function
+
+    public bool IsValidEmail(string emailaddress)
+    {
+        if (emailaddress == null || emailaddress.Length < 0)
+        {
+            return false;
+        }
+        else
+        {
+            try
+            {
+                MailAddress m = new MailAddress(emailaddress);
+
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+    }
+
+    protected bool validPassowrd;
+
+    public bool IsValidPassword(string password)
+    {
+        if (password == null || password == "" || password.Length < 5)
+        {
+            return false;
+        }
+        else
+        {
+            char[] one = password.ToCharArray();
+            char[] two = new char[one.Length];
+            int c = 0;
+            int n = 0;
+            for (int i = 0; i < one.Length; i++)
+            {
+                if (!Char.IsLetterOrDigit(one[i]))
+                {
+                    two[c] = one[i];
+                    c++;
+                }
+                if (one[i] == '1' || one[i] == '2' || one[i] == '3' || one[i] == '4' || one[i] == '5' || one[i] == '6' || one[i] == '7' || one[i] == '8' || one[i] == '9')
+                {
+                    n++;
+                }
+            }
+            if (c < new_register.NumberOfPasswordUniqueChar)
+            {
+                return false;
+            }
+
+            if (n < new_register.NumberOfPasswordNumericChar)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public static bool IsPhoneNumber(string number)
+    {
+        if (number != null || number.Length > 0)
+        {
+            return Regex.Match(number, @"^(\+[0-9]{9})$").Success;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    #endregion
 
 }

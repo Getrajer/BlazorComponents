@@ -12,15 +12,16 @@
 
 .component .component_container{
     width: 100%;
-    max-width: 1000px;
+    max-width: 1100px;
     display:grid;
-    grid-template-columns: 550px 450px;
+    grid-template-columns: 650px 450px;
 }
 
 .component_panel{
     display:flex;
     justify-content:center;
     width:100%;
+    height:100%;
 }
 
 .component_panel .component_panel_container{
@@ -35,9 +36,6 @@
     color: #f0f4fc;
     letter-spacing: 3px;
     text-transform: uppercase;
-}
-
-.component_panel .option{
 }
 
 .component_panel h1{
@@ -82,7 +80,7 @@
 
 .component_panel .button_container{
     padding: 0.5em 1.5em;
-    text-align: right;
+    text-align: center;
 }
 
 .component_panel .button_container button{
@@ -177,236 +175,156 @@ button:focus{
         color: black;
     }
 
-.colorBox{
+/*Login component*/
+.register{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+.register .register_container {
+    border-radius: 0.5em;
+    padding: 2em 3em;
+    width:100%;
+    max-width: 500px;
+}
+
+.register h5{
+    text-align:center;
+    padding: 1em 0;
+    font-size:2rem;
+    font-weight:600;
+    letter-spacing: 6px;
+    color: #f0f4fc;
+}
+
+.register label{
+    display:block;
+    text-align:center;
+    padding: 0.2em 0;
+    color: #f0f4fc;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+.register input{
+    display:block;
+    margin: 0.2em 0;
+    padding: 0.5em;
+    text-align:center;
+    border: unset;
+    width:100%;
+}
+
+.register .error_info{
+    padding: 0.2em 0;
+    color:red;
+    height: 35px;
+}
+
+.register .pin_choice{
+    display:flex;
+    justify-content:space-around;
+}
+
+.register .pin_choice input{
     width:35px;
     height:35px;
-    border-radius:1.5em;
 }
 
-.Green {
-    background-color: #50d300;
+.register .button_container{
+    display:flex;
+    justify-content:center;
 }
 
-.Red {
-    background-color: #b60000;
-}
-
-.Blue {
-    background-color: #0041c8;
-}
-
-.Pink {
-    background-color: #b400c8;
-}
-
-.item_card {
-    width: 100%;
-    max-width: 350px;
-    padding: 1em 0.5em;
-    border-radius: 0.7em;
-    transition: 0.5s all;
-}
-
-.svg_container {
-    position: relative;
-    width:100%;
-    max-width: 650px;
-}
-
-.svg {
-    margin-bottom: 1em;
-    padding: 1em;
-}
-
-.product_img {
-    width: 500px;
-    height: auto;
-}
-
-.product_description {
-    padding: 0.5em;
-}
-
-p {
-    margin-bottom: 0.5em;
-    font-weight: 500;
-}
-
-.dsc {
-    letter-spacing: 4px;
-    font-weight: 900;
-    font-size: 1rem;
-}
-
-.product_description h3 {
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    text-align: center;
+.register button{
+    width:200px;
+    padding:0.5em 0;
+    text-align:center;
+    background-color: #f0f4fc;
+    border:unset;
+    color:black;
     letter-spacing: 5px;
-    font-weight: 900;
-    margin-bottom: 0.3em;
-}
-
-
-.product_purchase_container {
-    padding: 1em;
-}
-
-.colors_container, .sizes_container, .price_container {
-    margin-bottom: 0.3em;
-}
-
-.check_boxes {
-    display: flex;
-    justify-content: space-around;
-}
-
-.buy_button_container {
-    padding: 0.3em;
-    text-align: center;
-}
-
-.buy_button_container button {
-    border: unset;
-    font-weight: 900;
-    font-size: 1.2rem;
     text-transform: uppercase;
-    padding: 0.6em 1em;
+    font-weight:600;
     transition: 0.5s;
 }
 
-.buy_button_container button:hover{
-    transform: translateY(-1px);
+.register button:hover{
+    transform:translateY(-3px);
+    letter-spacing:6px;
 }
 
 /*Scheme 1 style*/
-#Scheme_1 .item_card {
+#Scheme_1 .register_container {
     background: rgb(30,52,96);
     background: linear-gradient(0deg, rgba(30,52,96,1) 24%, rgba(40,67,122,1) 65%, rgba(70,118,215,1) 90%);
     color: #f0f4fc;
 }
 
-#Scheme_1 .buy_button_container button {
-    color: black;
-    background-color: #dde7fc;
-}
-
-#Scheme_1 .buy_button_container button:hover{
-    background-color:#ffffff;
-}
-/*End of scheme 1*/
-
 /*Scheme 2 style*/
-#Scheme_2 .item_card {
+#Scheme_2 .register_container {
     background: rgb(75,39,74);
     background: linear-gradient(0deg, rgba(75,39,74,1) 24%, rgba(138,43,148,1) 65%, rgba(164,56,152,1) 90%);
     color: #f0f4fc;
 }
 
-#Scheme_2 .buy_button_container button {
-    color: black;
-    background-color: #fcddfb;
-}
-
-#Scheme_2 .buy_button_container button:hover {
-    background-color: #ffffff;
-}
-/*End of scheme 2*/
-
-/*Scheme 2 style*/
-#Scheme_3 .item_card {
+/*Scheme 3 style*/
+#Scheme_3 .register_container {
     background: rgb(42,43,46);
     background: linear-gradient(0deg, rgba(42,43,46,1) 24%, rgba(69,73,82,1) 65%, rgba(134,141,157,1) 90%);
     color: #f0f4fc;
 }
 
-#Scheme_3 .buy_button_container button {
-    color: black;
-    background-color: #dde7fc;
-}
-
-#Scheme_3 .buy_button_container button:hover {
-    background-color: #ffffff;
-}
-/*End of scheme 2*/
-
-/*Scheme 2 style*/
-#Scheme_4 .item_card {
-    background: rgb(217,217,217);
-    background: linear-gradient(0deg, rgba(217,217,217,1) 24%, rgba(235,235,235,1) 45%, rgba(255,255,255,1) 64%);
+/*Scheme 4 style*/
+#Scheme_4 .register_container {
+    background: rgb(255, 255, 255);
+    border: 5px solid black;
     color: #1b1b1b;
 }
 
-#Scheme_4 .buy_button_container button {
+#Scheme_4 h5 {
     color: black;
-    background-color: #f1f1f1;
 }
 
-#Scheme_4 .buy_button_container button:hover {
-    background-color: #ffffff;
+#Scheme_4 label{
+    color:black;
 }
-/*End of scheme 2*/
+
+#Scheme_4 input {
+    border: 1px solid black;
+}
+
+#Scheme_4 button {
+    border: 1px solid black;
+    color: black;
+    font-weight:700;
+}
+/*End of login component*/
 
 /*Scheme 5 style*/
-#Scheme_5 .item_card {
+#Scheme_5 .register_container {
     background: rgb(55,112,61);
     background: linear-gradient(0deg, rgba(55,112,61,1) 24%, rgba(81,158,85,1) 45%, rgba(97,200,109,1) 64%);
-    color: #f0f4fc;
+    color: #f1fcf0;
 }
-
-#Scheme_5 .buy_button_container button {
-    color: black;
-    background-color: #dde7fc;
-}
-
-#Scheme_5 .buy_button_container button:hover {
-    background-color: #ffffff;
-}
-/*End of scheme 5*/
 
 /*Scheme 6 style*/
-#Scheme_6 .item_card {
+#Scheme_6 .register_container {
     background: rgb(112,55,63);
     background: linear-gradient(0deg, rgba(112,55,63,1) 24%, rgba(158,81,92,1) 45%, rgba(200,97,108,1) 64%);
-    color: #f0f4fc;
+    color: #f1fcf0;
 }
-
-#Scheme_6 .buy_button_container button {
-    color: black;
-    background-color: #dde7fc;
-}
-
-#Scheme_6 .buy_button_container button:hover {
-    background-color: #ffffff;
-}
-/*End of scheme 6*/
 
 /*Scheme 7 style*/
-#Scheme_7 .item_card {
+#Scheme_7 .register_container {
     background: rgb(112,108,55);
     background: linear-gradient(0deg, rgba(112,108,55,1) 24%, rgba(158,155,81,1) 45%, rgba(200,190,97,1) 64%);
-    color: #f0f4fc;
-}
-
-#Scheme_7 .buy_button_container button {
-    color: black;
-    background-color: #dde7fc;
-}
-
-#Scheme_7 .buy_button_container button:hover {
-    background-color: #ffffff;
-}
-/*End of scheme 7*/
-
-.bought_poduct{
-    width:100%;
-    text-align:center;
-    padding: 2em 1em;
-    font-size:1.3rem;
+    color: #f1fcf0;
 }
 
 /*Mediaquery*/
-@media screen and (max-width:1200px){
+@media screen and (max-width:1200px) {
     .component .component_container {
         width: 100%;
         max-width: 1000px;
@@ -415,15 +333,9 @@ p {
         grid-gap: 3em;
     }
 
-    .functional{
-        display:flex;
-        justify-content:center;
+    .functional {
+        display: flex;
+        justify-content: center;
     }
 }
 
-@media screen and (max-width:600px) {
-    .product_img {
-        width: 300px;
-        height: auto;
-    }
-}

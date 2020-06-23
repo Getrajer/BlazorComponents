@@ -185,7 +185,6 @@
                                 </svg>
                             </div>
 
-
                             <div @onclick="@(e => ChangeColorScheme(2))" class="color_scheme_option">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 70.87 70.87">
                                     <title>color_scheme_2</title>
@@ -227,6 +226,55 @@
                                                 <rect x="9.85" y="15.83" width="20.83" height="20.83" style="fill: #ebebeb;stroke: #231f20;stroke-miterlimit: 10" />
                                                 <rect x="40.61" y="15.83" width="20.83" height="20.83" style="fill: #fff;stroke: #231f20;stroke-miterlimit: 10" />
                                                 <rect x="25.02" y="41.4" width="20.83" height="20.83" style="fill: #1a1a1a;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <circle cx="35.44" cy="35.44" r="34.94" style="fill: none;stroke: #231f20;stroke-miterlimit: 10" />
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <div @onclick="@(e => ChangeColorScheme(5))" class="color_scheme_option">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 70.87 70.87">
+                                    <title>color_scheme_5</title>
+                                    <g id="Warstwa_2" data-name="Warstwa 2">
+                                        <g id="Warstwa_1-2" data-name="Warstwa 1">
+                                            <g>
+                                                <rect x="9.85" y="15.83" width="20.83" height="20.83" style="fill: #73bf44;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="40.61" y="15.83" width="20.83" height="20.83" style="fill: #0c8441;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="25.02" y="41.4" width="20.83" height="20.83" style="fill: #f8f8f8;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <circle cx="35.44" cy="35.44" r="34.94" style="fill: none;stroke: #231f20;stroke-miterlimit: 10" />
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <div @onclick="@(e => ChangeColorScheme(6))" class="color_scheme_option">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 70.87 70.87">
+                                    <title>color_scheme_6</title>
+                                    <g id="Warstwa_2" data-name="Warstwa 2">
+                                        <g id="Warstwa_1-2" data-name="Warstwa 1">
+                                            <g>
+                                                <rect x="9.85" y="15.83" width="20.83" height="20.83" style="fill: #ed184a;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="40.61" y="15.83" width="20.83" height="20.83" style="fill: #af1f23;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="25.02" y="41.4" width="20.83" height="20.83" style="fill: #f8f8f8;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <circle cx="35.44" cy="35.44" r="34.94" style="fill: none;stroke: #231f20;stroke-miterlimit: 10" />
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+
+
+                            <div @onclick="@(e => ChangeColorScheme(7))" class="color_scheme_option">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 70.87 70.87">
+                                    <title>color_scheme_7</title>
+                                    <g id="Warstwa_2" data-name="Warstwa 2">
+                                        <g id="Warstwa_1-2" data-name="Warstwa 1">
+                                            <g>
+                                                <rect x="9.85" y="15.83" width="20.83" height="20.83" style="fill: #f8ec24;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="40.61" y="15.83" width="20.83" height="20.83" style="fill: #cab72e;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="25.02" y="41.4" width="20.83" height="20.83" style="fill: #f8f8f8;stroke: #231f20;stroke-miterlimit: 10" />
                                                 <circle cx="35.44" cy="35.44" r="34.94" style="fill: none;stroke: #231f20;stroke-miterlimit: 10" />
                                             </g>
                                         </g>
@@ -452,6 +500,9 @@
             case 2: { ActualScheme = "Scheme_2"; break; }
             case 3: { ActualScheme = "Scheme_3"; break; }
             case 4: { ActualScheme = "Scheme_4"; break; }
+            case 5: { ActualScheme = "Scheme_5"; break; }
+            case 6: { ActualScheme = "Scheme_6"; break; }
+            case 7: { ActualScheme = "Scheme_7"; break; }
         }
     }
 

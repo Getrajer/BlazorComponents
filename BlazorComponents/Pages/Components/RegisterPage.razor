@@ -1,7 +1,7 @@
-﻿@page "/LoginPage"
+﻿@page "/RegisterPage"
 
 <head>
-    <link rel="stylesheet" href="../css/login_page_style.css" />
+    <link rel="stylesheet" href="../css/register_page_style.css" />
 </head>
 
 <div class="component">
@@ -9,45 +9,84 @@
 
         <div id="@ActualScheme" class="functional">
 
-            <div class="login">
-                <div class="login_container">
-                    <h5>Login to your account</h5>
+            <div class="register">
+                <div class="register_container">
+                    <h5>Register</h5>
 
+                    <div class="input_container">
+                        <label>Name</label>
+                        <input @bind="name" />
+                        <p class="error_info">@name_error</p>
+                    </div>
+
+                    <div class="input_container">
+                        <label>Last Name</label>
+                        <input @bind="last_name" />
+                        <p class="error_info">@last_name_error</p>
+                    </div>
 
                     <div class="input_container">
                         <label>Username</label>
-                        <input @bind="user_name"/>
+                        <input @bind="user_name" />
                         <p class="error_info">@user_name_error</p>
+                    </div>
+
+                    @if (needs_address)
+                    {
+                        <div class="input_container">
+                            <label>Address</label>
+                            <input @bind="address" />
+                            <p class="error_info">@address_error</p>
+                        </div>
+
+                        <div class="input_container">
+                            <label>Postcode</label>
+                            <input @bind="post_code" />
+                            <p class="error_info">@post_code_error</p>
+                        </div>
+
+                        <div class="input_container">
+                            <label>City</label>
+                            <input @bind="city" />
+                            <p class="error_info">@city_error</p>
+                        </div>
+
+                        <div class="input_container">
+                            <label>Country</label>
+                            <input @bind="country" />
+                            <p class="error_info">@country_error</p>
+                        </div>
+                    }
+
+                    @if (needs_phone_number)
+                    {
+                        <div class="input_container">
+                            <label>Phone number</label>
+                            <input @bind="phone_number" />
+                            <p class="error_info">@phone_number_error</p>
+                        </div>
+                    }
+
+                    <div class="input_container">
+                        <label>Email</label>
+                        <input @bind="email" />
+                        <p class="error_info">@email_error</p>
                     </div>
 
                     <div class="input_container">
                         <label>Password</label>
-                        <input @bind="password"/>
+                        <input @bind="password" />
                         <p class="error_info">@password_error</p>
                     </div>
 
-                    @if (has_sms_code == true)
-                    {
-                        <div class="input_container">
-                            <label>SMS Code</label>
-                            <input @bind="sms_code"/>
-                            <p class="error_info">@sms_code_error</p>
-                        </div>
-                    }
-
-                    @if (has_pin == true)
-                    {
-                        <div class="input_container">
-                            <label>Pin</label>
-                            <div class="pin_choice">
-                                <input @bind="code_1" maxlength="1" /> <input @bind="code_2" maxlength="1" /> <input @bind="code_3" maxlength="1" />
-                            </div>
-                            <p class="error_info">@code_error</p>
-                        </div>
-                    }
+                    <div class="input_container">
+                        <label>Password Confirmation</label>
+                        <input @bind="password_confirmation" />
+                        <p class="error_info">@password_confirmation_error</p>
+                    </div>
 
                     <div class="button_container">
-                        <button @onclick="Login">Login</button>
+                        <button @onclick="Register">Register</button>
                     </div>
 
                 </div>
@@ -191,17 +230,42 @@
 
                         </div>
                     </div>
+
                     <div class="option">
-                        <h4>If has SMS login method</h4>
+                        <h4>Password unique characters</h4>
+                        <div class="input_container">
+                            <label>Number 1 - 5</label>
+                            <input />
+                        </div>
+
                         <div class="button_container">
-                            <button @onclick="ChangeIfHasSMS">@sms_string_btn</button>
+                            <button @onclick="ChangeUniquePassword">Change</button>
                         </div>
                     </div>
 
                     <div class="option">
-                        <h4>If has SMS login method</h4>
+                        <h4>Password numeric characters</h4>
+                        <div class="input_container">
+                            <label>Number 1 - 5</label>
+                            <input />
+                        </div>
+
                         <div class="button_container">
-                            <button @onclick="ChangeIfHasPinCode">@pin_string_btn</button>
+                            <button @onclick="ChangeNumericPassword">Change</button>
+                        </div>
+                    </div>
+
+                    <div class="option">
+                        <h4>If needs address</h4>
+                        <div class="button_container">
+                            <button @onclick="ChangeIfNeedsAddress">@address_string_btn</button>
+                        </div>
+                    </div>
+
+                    <div class="option">
+                        <h4>If needs phone number</h4>
+                        <div class="button_container">
+                            <button @onclick="ChangeIfNeedsPhoneNumber">@phone_number_string_btn</button>
                         </div>
                     </div>
 
@@ -228,91 +292,195 @@
     /// <summary>
     /// This class will determine login component
     /// </summary>
-    public class LoginComponent
+    public class RegisterComponent
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string ColorScheme { get; set; }
-        public bool HasSmsOption { get; set; }
-        public bool HasPinOption { get; set; }
 
-        public LoginComponent() { }
+        /// <summary>
+        /// Will determine how many characters username must have
+        /// </summary>
+        public int MinUserNameCharacters { get; set; }
+
+        /// <summary>
+        /// Will determine how many unique chars password must have
+        /// </summary>
+        public int NumberOfPasswordUniqueChar { get; set; }
+
+        /// <summary>
+        /// Will determine how many number chars password must have
+        /// </summary>
+        public int NumberOfPasswordNumericChar { get; set; }
+
+
+        /// <summary>
+        /// Will determine if user needs to give adress
+        /// </summary>
+        public bool RequiresAddress { get; set; }
+
+        /// <summary>
+        /// Will determine if user needs to give phone number
+        /// </summary>
+        public bool RequiresPhoneNumber { get; set; }
+
+
+        public RegisterComponent() { }
     }
 
     /// <summary>
-    /// This class is used to login test
+    /// This class is used register
     /// </summary>
     public class UserAccount
     {
+        public int Id { get; set; }
         public string UserName { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; }
+        public string Postcode { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
-        public string SmsCode { get; set; }
-        public int Code1 { get; set; }
-        public int Code2 { get; set; }
-        public int Code3 { get; set; }
 
         public UserAccount() { }
     }
 
-    //Variables for showing functions
-    protected bool has_pin = true;
-    protected bool has_sms_code = true;
 
     //Variables for user input
+    protected string name = "";
+    protected string last_name = "";
+    protected string address = "";
+    protected string post_code = "";
+    protected string city = "";
+    protected string country = "";
+    protected string phone_number = "";
+    protected string email = "";
     protected string user_name = "";
     protected string password = "";
-    protected string sms_code = "";
-    protected int code_1 = 0;
-    protected int code_2 = 0;
-    protected int code_3 = 0;
+    protected string password_confirmation = "";
 
-    //Error Variables for login
+
+    //Error Variables for register
     protected string user_name_error = "";
+    protected string name_error = "";
+    protected string last_name_error = "";
+    protected string address_error = "";
+    protected string post_code_error = "";
+    protected string city_error = "";
+    protected string country_error = "";
+    protected string phone_number_error = "";
+    protected string email_error = "";
     protected string password_error = "";
-    protected string sms_code_error = "";
-    protected string code_error = "";
+    protected string password_confirmation_error = "";
 
     //Text for buttons
-    protected string sms_string_btn = "Remove";
-    protected string pin_string_btn = "Remove";
-
+    protected string address_string_btn = "Remove";
+    protected string phone_number_string_btn = "Remove";
     protected string logged_in_status = "";
+
+    //Variables for controling if register would need more information from user
+    protected bool needs_address = true;
+    protected bool needs_phone_number = true;
+
+    protected int numeric_char = 3;
+    protected int unique_char = 2;
+
+
+    //Color sheme declaration
+    protected string ActualScheme = "Scheme_1";
 
     /// <summary>
     /// Example account
     /// </summary>
     protected UserAccount example_account = new UserAccount();
 
-    protected LoginComponent new_login_component = new LoginComponent();
+    protected RegisterComponent new_register = new RegisterComponent();
 
     protected override async Task OnInitializedAsync()
     {
-        example_account.UserName = "matisone";
-        example_account.Password = "mypass!!word32";
-        example_account.SmsCode = "3435334";
-        example_account.Code1 = 4;
-        example_account.Code2 = 1;
-        example_account.Code3 = 7;
-
-        new_login_component.ColorScheme = "Scheme_1";
-        new_login_component.HasPinOption = true;
-        new_login_component.HasSmsOption = true;
-        new_login_component.Id = 0;
-        new_login_component.Name = "CreatorName";
+        new_register.Id = 0;
+        new_register.ColorScheme = "Scheme_1";
+        new_register.MinUserNameCharacters = 5;
+        new_register.Name = "My custom register form";
+        new_register.NumberOfPasswordNumericChar = 3;
+        new_register.NumberOfPasswordUniqueChar = 2;
+        new_register.RequiresAddress = true;
+        new_register.RequiresPhoneNumber = true;
     }
 
-    //Color shemes declarations
-    protected string ActualScheme = "Scheme_1";
 
     /// <summary>
-    /// This function will login to account
+    /// Will change if register form needs address from the user
     /// </summary>
-    public void Login()
+    public void ChangeIfNeedsAddress()
+    {
+        if(needs_address == false)
+        {
+            needs_address = true;
+            address_string_btn = "Remove";
+            new_register.RequiresAddress = true;
+        }
+        else
+        {
+            needs_address = false;
+            address_string_btn = "Add";
+            new_register.RequiresAddress = false;
+        }
+
+    }
+
+    /// <summary>
+    /// Will change if register form needs phone number from the user
+    /// </summary>
+    public void ChangeIfNeedsPhoneNumber()
+    {
+        if (needs_phone_number == false)
+        {
+            needs_phone_number = true;
+            phone_number_string_btn = "Remove";
+            new_register.RequiresPhoneNumber = true;
+        }
+        else
+        {
+            needs_phone_number = false;
+            phone_number_string_btn = "Add";
+            new_register.RequiresPhoneNumber = false;
+        }
+
+    }
+
+    /// <summary>
+    /// Will change number of unique characters for password
+    /// </summary>
+    public void ChangeUniquePassword()
+    {
+        if(unique_char <= 5 && unique_char >= 0)
+        {
+            new_register.NumberOfPasswordUniqueChar = unique_char;
+        }
+    }
+
+    /// <summary>
+    /// Will change number of numeric characters for password
+    /// </summary>
+    public void ChangeNumericPassword()
+    {
+        if (numeric_char <= 5 && numeric_char >= 0)
+        {
+            new_register.NumberOfPasswordNumericChar = numeric_char;
+        }
+    }
+
+    /// <summary>
+    /// This function will create account
+    /// </summary>
+    public void Register()
     {
         user_name_error = "";
         password_error = "";
-        sms_code_error = "";
-        code_error = "";
 
         bool is_error = false;
 
@@ -328,82 +496,18 @@
             password_error = "Wrong password or user name!";
         }
 
-        //if sms code login option is true
-        if (has_sms_code == true)
-        {
-            if (sms_code != example_account.SmsCode)
-            {
-                is_error = true;
-                sms_code_error = "Wrong code!";
-            }
-        }
-
-        //if pin login option is true
-        if(has_pin == true)
-        {
-
-            if (code_1 != example_account.Code1 || code_2 != example_account.Code2 || code_3 != example_account.Code3)
-            {
-                is_error = true;
-                code_error = "Wrong pin code!";
-            }
-        }
-
         if(is_error == false)
         {
             logged_in_status = "You logged in to the account";
 
             user_name = "";
             password = "";
-            sms_code = "";
-            code_1 = 0;
-            code_2 = 0;
-            code_3 = 0;
-
         }
         else
         {
             logged_in_status = "Something went wrong with login";
         }
 
-    }
-
-    /// <summary>
-    /// Will change if this form will have sms login method
-    /// </summary>
-    public void ChangeIfHasSMS()
-    {
-        if(has_sms_code == false)
-        {
-            has_sms_code = true;
-            sms_string_btn = "Remove";
-            new_login_component.HasSmsOption = true;
-        }
-        else
-        {
-            has_sms_code = false;
-            sms_string_btn = "Add";
-            new_login_component.HasSmsOption = false;
-        }
-    }
-
-    /// <summary>
-    /// Will change if this form will have pin login method
-    /// </summary>
-    public void ChangeIfHasPinCode()
-    {
-        if (has_pin == false)
-        {
-            has_pin = true;
-            pin_string_btn = "Remove";
-            new_login_component.HasPinOption = true;
-        }
-        else
-        {
-            has_pin = false;
-            pin_string_btn = "Add";
-            new_login_component.HasPinOption = false;
-        }
     }
 
     /// <summary>

@@ -186,6 +186,8 @@ button:focus{
 .login .login_container{
     border-radius:0.5em;
     padding: 2em 3em;
+    width:100%;
+    max-width:450px;
 }
 
 .login h5{
@@ -193,6 +195,7 @@ button:focus{
     padding: 1em 0;
     font-size:2rem;
     font-weight:600;
+    letter-spacing: 6px;
     color: #f0f4fc;
 }
 
@@ -298,8 +301,29 @@ button:focus{
     color: black;
     font-weight:700;
 }
-
 /*End of login component*/
+
+/*Scheme 5 style*/
+#Scheme_5 .login_container {
+    background: rgb(55,112,61);
+    background: linear-gradient(0deg, rgba(55,112,61,1) 24%, rgba(81,158,85,1) 45%, rgba(97,200,109,1) 64%);
+    color: #f1fcf0;
+}
+
+/*Scheme 6 style*/
+#Scheme_6 .login_container {
+    background: rgb(112,55,63);
+    background: linear-gradient(0deg, rgba(112,55,63,1) 24%, rgba(158,81,92,1) 45%, rgba(200,97,108,1) 64%);
+    color: #f1fcf0;
+}
+
+/*Scheme 7 style*/
+#Scheme_7 .login_container {
+    background: rgb(112,108,55);
+    background: linear-gradient(0deg, rgba(112,108,55,1) 24%, rgba(158,155,81,1) 45%, rgba(200,190,97,1) 64%);
+    color: #f1fcf0;
+}
+
 
 
 
@@ -316,12 +340,5 @@ button:focus{
     .functional {
         display: flex;
         justify-content: center;
-    }
-}
-
-@media screen and (max-width:600px) {
-    .product_img {
-        width: 300px;
-        height: auto;
     }
 }

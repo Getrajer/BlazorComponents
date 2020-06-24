@@ -1,8 +1,9 @@
 ﻿* {
-    color: rgb(0, 0, 0);
+    font-family: 'Martel', serif;
 }
 
 h1, h2, h3, h4, h5 {
+    font-family: 'Domine', serif;
 }
 
 [type="radio"] {
@@ -28,17 +29,19 @@ img{
     height: 100px;
 }
 
-.program_container{
-    display:flex;
-    justify-content:center;
-    align-items:center;
+.program_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(0, 0, 0);
 }
 
 .post_component {
     background-color: rgb(255, 255, 255);
-    width: 900px;
+    width:100%;
+    max-width: 1000px;
     height: 100%;
-    padding: 1em 2em;
+    padding: 1em 1.5em;
     border-radius: 0.5em;
     text-align: center;
     border-radius: 0.5em;
@@ -46,7 +49,6 @@ img{
 
 
 .add_post_button {
-    padding: 0.5em;
     text-align:left;
 }
 
@@ -151,14 +153,6 @@ textarea {
     text-align: left;
 }
 
-imput {
-    color: white;
-}
-
-textarea{
-    color: white;
-}
-
 /*Post Display*/
 
 .post_container {
@@ -217,6 +211,7 @@ textarea{
     font-size: 1.3rem;
     min-height: 300px;
     white-space: pre-line;
+    line-height: 38px;
     width:100%;
     max-width: 650px;
 }

@@ -195,6 +195,8 @@ button:focus{
 .register h5{
     text-align:center;
     padding: 1em 0;
+    text-transform:uppercase;
+    font-size:2.3rem;
     font-size:2rem;
     font-weight:600;
     letter-spacing: 6px;
@@ -210,19 +212,26 @@ button:focus{
     text-transform: uppercase;
 }
 
-.register input{
-    display:block;
-    margin: 0.2em 0;
-    padding: 0.5em;
-    text-align:center;
+.register input {
     border: unset;
-    width:100%;
+    background-color: rgba(167, 177, 198, 0.70);
+    padding: 0.2em 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.register input:focus{
+    background-color:rgba(167, 177, 198, 0.85);
+    width: 100%;
+    text-align:center;
 }
 
 .register .error_info{
     padding: 0.2em 0;
     color:red;
-    height: 35px;
+    height: 30px;
 }
 
 .register .pin_choice{
@@ -238,6 +247,7 @@ button:focus{
 .register .button_container{
     display:flex;
     justify-content:center;
+    padding: 2em 0;
 }
 
 .register button{
@@ -315,8 +325,12 @@ button:focus{
 /*Scheme 6 style*/
 #Scheme_6 .register_container {
     background: rgb(112,55,63);
-    background: linear-gradient(0deg, rgba(112,55,63,1) 24%, rgba(158,81,92,1) 45%, rgba(200,97,108,1) 64%);
+    background: linear-gradient(0deg, rgb(121, 46, 56) 24%, rgb(160, 73, 85) 45%, rgb(206, 90, 103) 64%);
     color: #f1fcf0;
+}
+
+#Scheme_6 .register .error_info{
+    color: #6c00b6;
 }
 
 /*Scheme 7 style*/

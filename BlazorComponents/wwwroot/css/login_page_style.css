@@ -72,9 +72,17 @@
     letter-spacing: 5px;
 }
 
-.component_panel input{
-    border: 2px solid #28437a;
+.component_panel input {
+    border: unset;
+    background-color: rgba(147, 172, 221, 0.70);
     width: 100%;
+    color: white;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.component_panel input:focus{
+    background-color:rgba(147, 172, 221, 0.85);
     text-align:center;
 }
 
@@ -193,7 +201,8 @@ button:focus{
 .login h5{
     text-align:center;
     padding: 1em 0;
-    font-size:2rem;
+    text-transform:uppercase;
+    font-size:2.3rem;
     font-weight:600;
     letter-spacing: 6px;
     color: #f0f4fc;
@@ -208,13 +217,20 @@ button:focus{
     text-transform: uppercase;
 }
 
-.login input{
-    display:block;
-    margin: 0.5em 0;
-    padding: 0.5em;
-    text-align:center;
+.login input {
     border: unset;
-    width:100%;
+    background-color: rgba(167, 177, 198, 0.70);
+    padding: 0.2em 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.login input:focus{
+    background-color:rgba(167, 177, 198, 0.85);
+    width: 100%;
+    text-align:center;
 }
 
 .login .error_info{
@@ -231,6 +247,7 @@ button:focus{
 .login .pin_choice input{
     width:35px;
     height:35px;
+    border: unset;
 }
 
 .login .button_container{
@@ -242,7 +259,7 @@ button:focus{
     width:200px;
     padding:0.5em 0;
     text-align:center;
-    background-color: #f0f4fc;
+    background-color: #ffffff;
     border:unset;
     color:black;
     letter-spacing: 5px;
@@ -262,6 +279,7 @@ button:focus{
     background: linear-gradient(0deg, rgba(30,52,96,1) 24%, rgba(40,67,122,1) 65%, rgba(70,118,215,1) 90%);
     color: #f0f4fc;
 }
+
 
 /*Scheme 2 style*/
 #Scheme_2 .login_container {
@@ -313,8 +331,12 @@ button:focus{
 /*Scheme 6 style*/
 #Scheme_6 .login_container {
     background: rgb(112,55,63);
-    background: linear-gradient(0deg, rgba(112,55,63,1) 24%, rgba(158,81,92,1) 45%, rgba(200,97,108,1) 64%);
+    background: linear-gradient(0deg, rgb(121, 46, 56) 24%, rgb(160, 73, 85) 45%, rgb(206, 90, 103) 64%);
     color: #f1fcf0;
+}
+
+#Scheme_6 .login .error_info {
+    color: #6c00b6;
 }
 
 /*Scheme 7 style*/
@@ -323,9 +345,6 @@ button:focus{
     background: linear-gradient(0deg, rgba(112,108,55,1) 24%, rgba(158,155,81,1) 45%, rgba(200,190,97,1) 64%);
     color: #f1fcf0;
 }
-
-
-
 
 /*Mediaquery*/
 @media screen and (max-width:1200px) {

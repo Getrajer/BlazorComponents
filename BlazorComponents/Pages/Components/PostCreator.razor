@@ -1,107 +1,17 @@
 ﻿@page "/CreatePost"
 
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Domine:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Martel:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/post_creator_style.css" />
 </head>
 
-<!--This is going to be displayed when adding the post-->
-@if (isPostEdited == false) { 
-<div class="program_container">
-    <div class="post_component">
 
-
-        <div class="add_post_button">
-            <button @onclick="ToggleAddPost">@ToggleButtonText</button>
-        </div>
-
-        @if (AddPostChecker == true)
-        {
-            <div class="add_post_container">
-                <div class="add_title_container">
-                    <label>Title of post: </label>
-                    <input @bind="title" />
-                    <p class="error">@title_input_error</p>
-                </div>
-
-                <div class="add_paragraphs_images_container">
-                    @foreach (var o in paragraphs)
-                    {
-
-
-                        if (o.IfAddNext == true)
-                        {
-                            <div class="new_paragraph">
-
-                                @if (o.ImgPath != null && o.ImgPath != "" && o.ImgBeforeAfter == true)
-                                {
-                                    <img class="img_preview" src="@o.ImgPath" alt="@o.ImageName" />
-                                }
-
-                                <label>Paragraph content:</label>
-
-                                <textarea @bind="o.ParagraphText"></textarea>
-
-                                @if (o.ImgPath != null && o.ImgPath != "" && o.ImgBeforeAfter == false)
-                                {
-                                    <img class="img_preview" src="@o.ImgPath" alt="@o.ImageName" />
-                                }
-
-                                <div class="add_image_btn_container">
-                                    <button @onclick="@(e => ToggleAddImage(paragraphs[o.Id]))">@o.ImgBtnTxt</button>
-                                </div>
-                                @if (o.IfAddImage == true)
-                                {
-                                    <div class="image_add_container">
-                                        <p class="text-muted">This is just a demonstration. When implemented user will be able to add image from local or server storeage.</p>
-
-
-                                        @foreach (var i in images)
-                                        {
-                                            <label class="image_label" @onclick="@(e => ChangeImage(i, o))">
-                                                <input type="radio" name="test" value="small" checked>
-                                                <img src="@i.Path" alt="@i.Name">
-                                            </label>
-                                        }
-
-                                        <div class="image_position_buttons">
-                                            <button @onclick="@(e => AddImageAfter(paragraphs[o.Id]))">Set image before paragraph</button>
-                                            <button @onclick="@(e => AddImageBefore(paragraphs[o.Id]))">Set image after paragraph</button>
-                                        </div>
-
-                                    </div>
-                                }
-                                <div class="paragraphs_add_delete_buttons_container">
-                                    @if (paragraphs[o.Id + 1].IfAddNext != true)
-                                    {
-                                        if (o.Id != 0)
-                                        {
-                                            <button @onclick="@(e => CancelNewParagraph(paragraphs[o.Id]))">Delete Paragraph</button>
-                                        }
-
-                                        if (o.Id != NumberOfParagraphs - 1)
-                                        {
-                                            <button @onclick="@(e => AddAnotherParagraph(paragraphs[o.Id]))">Add New Paragraph</button>
-                                        }
-                                    }
-                                </div>
-                            </div>
-                        }
-                    }
-                </div>
-
-                <div class="create_post_btn_container">
-                    <button @onclick="CreateNewPost">Create Post</button>
-                </div>
-            </div>
-        }
-    </div>
-</div>
-}
 
 
 <div class="program_container">
     <div class="all_posts_container">
-        @for(int j = POSTS.Count - 1; j >= 0; j --)
+        @for (int j = POSTS.Count - 1; j >= 0; j--)
         {
             var p = POSTS[j];
 
@@ -171,29 +81,29 @@
 
                         <label>Paragraph @(i + 1)</label>
                         <textarea @bind="p.Paragraphs[i]"></textarea>
-                            <p>Img Id @p.Images[i].Id</p>
+                        <p>Img Id @p.Images[i].Id</p>
 
-                            if (p.Images[i].Path != "" && p.Images[i].Path != "" && p.Images[i].ImgBeforeAfter == false)
-                            {
+                        if (p.Images[i].Path != "" && p.Images[i].Path != "" && p.Images[i].ImgBeforeAfter == false)
+                        {
                             <div class="post_img_container">
                                 <img src="@p.Images[i].Path" alt="@p.Images[i].Name" />
                             </div>
-                            }
-
-                        <div class="image_add_container">
-                        <p class="text-muted">This is just a demonstration. When implemented user will be able to add image form local or server storeage.</p>
-                        <label>Add or Edit Image</label>
-                        @foreach (var img in images)
-                        {
-                            <label class="image_label" @onclick="@(e => EditImage(img, p, 0))">
-                                <input type="radio" name="test" value="small" checked>
-                                <img src="@img.Path" alt="@img.Name">
-                            </label>
                         }
 
-                        <div class="image_position_buttons">
+                        <div class="image_add_container">
+                            <p class="text-muted">This is just a demonstration. When implemented user will be able to add image form local or server storeage.</p>
+                            <label>Add or Edit Image</label>
+                            @foreach (var img in images)
+                            {
+                                <label class="image_label" @onclick="@(e => EditImage(img, p, 0))">
+                                    <input type="radio" name="test" value="small" checked>
+                                    <img src="@img.Path" alt="@img.Name">
+                                </label>
+                            }
+
+                            <div class="image_position_buttons">
+                            </div>
                         </div>
-                    </div>
                     }
 
                     <button @onclick="@(e =>ToggleEditPost(p))">Finish</button>
@@ -203,6 +113,100 @@
     </div>
 </div>
 
+
+<!--This is going to be displayed when adding the post-->
+@if (isPostEdited == false)
+{
+    <div class="program_container">
+        <div class="post_component">
+
+
+            <div class="add_post_button">
+                <button @onclick="ToggleAddPost">@ToggleButtonText</button>
+            </div>
+
+            @if (AddPostChecker == true)
+            {
+                <div class="add_post_container">
+                    <div class="add_title_container">
+                        <label>Title of post: </label>
+                        <input @bind="title" />
+                        <p class="error">@title_input_error</p>
+                    </div>
+
+                    <div class="add_paragraphs_images_container">
+                        @foreach (var o in paragraphs)
+                        {
+
+                            if (o.IfAddNext == true)
+                            {
+                                <div class="new_paragraph">
+
+                                    @if (o.ImgPath != null && o.ImgPath != "" && o.ImgBeforeAfter == true)
+                                    {
+                                        <img class="img_preview" src="@o.ImgPath" alt="@o.ImageName" />
+                                    }
+
+                                    <label>Paragraph content:</label>
+
+                                    <textarea @bind="o.ParagraphText"></textarea>
+
+                                    @if (o.ImgPath != null && o.ImgPath != "" && o.ImgBeforeAfter == false)
+                                    {
+                                        <img class="img_preview" src="@o.ImgPath" alt="@o.ImageName" />
+                                    }
+
+                                    <div class="add_image_btn_container">
+                                        <button @onclick="@(e => ToggleAddImage(paragraphs[o.Id]))">@o.ImgBtnTxt</button>
+                                    </div>
+                                    @if (o.IfAddImage == true)
+                                    {
+                                        <div class="image_add_container">
+                                            <p class="text-muted">This is just a demonstration. When implemented user will be able to add image from local or server storeage.</p>
+
+
+                                            @foreach (var i in images)
+                                            {
+                                                <label class="image_label" @onclick="@(e => ChangeImage(i, o))">
+                                                    <input type="radio" name="test" value="small" checked>
+                                                    <img src="@i.Path" alt="@i.Name">
+                                                </label>
+                                            }
+
+                                            <div class="image_position_buttons">
+                                                <button @onclick="@(e => AddImageAfter(paragraphs[o.Id]))">Set image before paragraph</button>
+                                                <button @onclick="@(e => AddImageBefore(paragraphs[o.Id]))">Set image after paragraph</button>
+                                            </div>
+
+                                        </div>
+                                    }
+                                    <div class="paragraphs_add_delete_buttons_container">
+                                        @if (paragraphs[o.Id + 1].IfAddNext != true)
+                                        {
+                                            if (o.Id != 0)
+                                            {
+                                                <button @onclick="@(e => CancelNewParagraph(paragraphs[o.Id]))">Delete Paragraph</button>
+                                            }
+
+                                            if (o.Id != NumberOfParagraphs - 1)
+                                            {
+                                                <button @onclick="@(e => AddAnotherParagraph(paragraphs[o.Id]))">Add New Paragraph</button>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+
+                    <div class="create_post_btn_container">
+                        <button @onclick="CreateNewPost">Create Post</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
 
 @code {
 
@@ -347,13 +351,13 @@
         NumberOfParagraphs = 10;
 
         //This loop will create number of slots for creating new paragraphs
-        for(int i = 0; i <= NumberOfParagraphs; i++)
+        for (int i = 0; i <= NumberOfParagraphs; i++)
         {
             AddParagraph p = new AddParagraph();
             p.Id = i;
 
             //Always first object set to true
-            if(p.Id == 0)
+            if (p.Id == 0)
             {
                 p.IfAddNext = true;
             }
@@ -364,7 +368,7 @@
 
         //Mock img data
         Image i1 = new Image(0, "../images/article_img_1.jpg", "TechAbstract");
-        Image i2 = new Image(1,"../images/article_img_2.jpg", "AI");
+        Image i2 = new Image(1, "../images/article_img_2.jpg", "AI");
 
 
         images.Add(i1);
@@ -417,12 +421,12 @@
         title = "";
         author = "";
 
-        if(AddPostChecker == false)
+        if (AddPostChecker == false)
         {
             AddPostChecker = true;
             ToggleButtonText = "Cancel";
         }
-        else if(AddPostChecker == true)
+        else if (AddPostChecker == true)
         {
             AddPostChecker = false;
             ToggleButtonText = "Add Post";
@@ -430,24 +434,24 @@
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="p"></param>
     public void AddAnotherParagraph(AddParagraph p)
     {
-        if(p.Id < NumberOfParagraphs - 1)
+        if (p.Id < NumberOfParagraphs - 1)
         {
             paragraphs[p.Id + 1].IfAddNext = true;
         }
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="p"></param>
     public void CancelNewParagraph(AddParagraph p)
     {
-        if(p.Id != 0)
+        if (p.Id != 0)
         {
             p.IfAddNext = false;
             p.ImageName = "";
@@ -456,31 +460,31 @@
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="p"></param>
     public void AddImageBefore(AddParagraph p)
     {
-        if(p.ImgBeforeAfter == true)
+        if (p.ImgBeforeAfter == true)
         {
             p.ImgBeforeAfter = false;
         }
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="p"></param>
     public void AddImageAfter(AddParagraph p)
     {
-        if(p.ImgBeforeAfter == false)
+        if (p.ImgBeforeAfter == false)
         {
             p.ImgBeforeAfter = true;
         }
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="i"></param>
     /// <param name="p"></param>
@@ -492,12 +496,12 @@
 
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="p"></param>
     public void ToggleAddImage(AddParagraph p)
     {
-        if(p.IfAddImage == false)
+        if (p.IfAddImage == false)
         {
             p.IfAddImage = true;
             p.ImgBtnTxt = "Cancel adding image";
@@ -513,14 +517,14 @@
 
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public void CreateNewPost()
     {
         //Reset variables
         title_input_error = "";
 
-        if(title.Length < 5)
+        if (title.Length < 5)
         {
             title_input_error = "Title needs to be at least 5 characters long!";
         }
@@ -531,9 +535,9 @@
             post.Author = example_author;
             post.PostTitle = title;
 
-            for(int i = 0; i < paragraphs.Count - 1; i++)
+            for (int i = 0; i < paragraphs.Count - 1; i++)
             {
-                if(paragraphs[i].IfAddNext == true)
+                if (paragraphs[i].IfAddNext == true)
                 {
                     Image image = new Image();
                     image.Id = i;
@@ -552,13 +556,13 @@
             title = "";
             ToggleButtonText = "Add Post";
             AddPostChecker = false;
-            for(int i = 0; i <= NumberOfParagraphs; i++)
+            for (int i = 0; i <= NumberOfParagraphs; i++)
             {
                 AddParagraph p = new AddParagraph();
                 p.Id = i;
 
                 //Always first object set to true
-                if(p.Id == 0)
+                if (p.Id == 0)
                 {
                     p.IfAddNext = true;
                 }
@@ -569,7 +573,7 @@
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="post"></param>
     public void DeletePost(Post post)
@@ -577,9 +581,9 @@
         POSTS.RemoveAt(post.Id);
 
         //Reset Id
-        if(POSTS.Count != 0)
+        if (POSTS.Count != 0)
         {
-            for(int i = 0; i < POSTS.Count; i++)
+            for (int i = 0; i < POSTS.Count; i++)
             {
                 POSTS[i].Id = i;
             }
@@ -587,17 +591,17 @@
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="post"></param>
     public void ToggleEditPost(Post post)
     {
-        if(post.IsBeeingEdited == false)
+        if (post.IsBeeingEdited == false)
         {
             post.IsBeeingEdited = true;
             isPostEdited = true;
         }
-        else if(post.IsBeeingEdited == true)
+        else if (post.IsBeeingEdited == true)
         {
             post.IsBeeingEdited = false;
             isPostEdited = false;

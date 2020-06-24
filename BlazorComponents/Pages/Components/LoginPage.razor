@@ -11,18 +11,20 @@
 
             <div class="login">
                 <div class="login_container">
-                    <h5>Login to your account</h5>
+                    <div class="title_container">
+                        <h5>Login</h5>
+                    </div>
 
 
                     <div class="input_container">
                         <label>Username</label>
-                        <input @bind="user_name"/>
+                        <input @bind="user_name" />
                         <p class="error_info">@user_name_error</p>
                     </div>
 
                     <div class="input_container">
                         <label>Password</label>
-                        <input @bind="password"/>
+                        <input @bind="password" />
                         <p class="error_info">@password_error</p>
                     </div>
 
@@ -30,7 +32,7 @@
                     {
                         <div class="input_container">
                             <label>SMS Code</label>
-                            <input @bind="sms_code"/>
+                            <input @bind="sms_code" />
                             <p class="error_info">@sms_code_error</p>
                         </div>
                     }

@@ -47,7 +47,6 @@ img{
     border-radius: 0.5em;
 }
 
-
 .add_post_button {
     text-align:left;
 }
@@ -89,6 +88,7 @@ label {
     font-weight: 900;
     margin-bottom: 0.5em;
 }
+
 input {
     display: block;
     border: none;

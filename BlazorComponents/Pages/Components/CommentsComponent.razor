@@ -1,0 +1,759 @@
+﻿@page "/Comments"
+@using System.Net
+
+
+<head>
+    <link rel="stylesheet" href="../css/comments_style.css"/>
+</head>
+
+<div class="component">
+    <div class="component_container">
+
+        <div class="comment_program">
+            <div class="comments_container">
+                @foreach (var c in comments)
+                {
+                <div class="comment_container @c.DisplayComment">
+
+                    <div class="comment_box">
+                        @c.Message
+                    </div>
+
+                    <div class="user_container">
+                        <div class="user_box1">
+                            <div class="img_container">
+                                <img src="@c.ImgPath" />
+                            </div>
+                        </div>
+                        <div class="user_box2">
+                            <p class="name"> @c.Name </p>
+                            @if (c.BeenEdited == true)
+                            {
+                                <p><span class="bold">Edited:</span> @c.Posted</p>
+                            }
+                            else
+                            {
+                                <p><span class="bold">Posted:</span> @c.Posted</p>
+                            }
+                        </div>
+
+                        <div class="rates">
+                            <div class="rate_box user_box3">
+                                <p>Likes: @c.Like</p>
+                                <button class="rate_btn" @onclick="@(e => LikeComment(c.Id))"><i class="fa fa-thumbs-up"></i></button>
+                            </div>
+                            <div class="rate_box">
+                                <p>Dislikes: @c.Dislike</p>
+                                <button class="rate_btn" @onclick="@(e => DislikeComment(c.Id))"><i class="fa fa-thumbs-down"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (Client_IP == c.CreatorsIP)
+                    {
+                        <div class="comment_btn_box">
+                            <button class="btn" @onclick="@(e => DeleteComment(c.Id))">Delete Comment</button>
+                        </div>
+                    }
+
+
+                    @if (Client_IP == c.CreatorsIP)
+                    {
+                        @if (comments[c.Id].DisplayEdit == "display_none_2")
+                        {
+                            <div class="comment_btn_box">
+                                <button class="btn" @onclick="@(e => ToggleEditWindow(c.Id))">Edit Comment</button>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="comment_btn_box">
+                                <button class="btn" @onclick="@(e => ToggleEditWindow(c.Id))">Cancel</button>
+                            </div>
+                        }
+                    }
+
+                </div>
+
+
+                    <div class="@c.DisplayEdit">
+                        <div class="edit_comment_container">
+                            <div>
+                                @error_message
+                            </div>
+                            <div class="input-box">
+                                <label>Name: </label><br />
+                                <input placeholder="@c.Name" @bind="edit_name" />
+                            </div>
+                            <div class="input-box">
+                                <label>Your comment: </label><br />
+                                <textarea placeholder="@c.Message" @bind="edit_message"></textarea>
+                            </div>
+                            <div class="input-box">
+                                @foreach (var o in imagePaths)
+                                {
+                                    <label @onclick="@(e => ChangeAvatarEdit(o.Id))">
+                                        <input type="radio" name="test" value="small" checked>
+                                        <img src="@o.ImgPath">
+                                    </label>
+                                }
+                            </div>
+                            <div class="comment_btn_box">
+                                <button class="btn" @onclick="@(e => EditComment(c.Id))">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+
+            <div class="add_comment_container">
+                <div class="title_add_comment">
+                    <h2>Add comment</h2>
+                </div>
+
+                <div class="error">
+                    @error_message
+                </div>
+
+                <div class="input-box">
+                    <label>Name: </label>
+                    <br />
+                    <input @bind="name" />
+                </div>
+                <div class="input-box">
+                    <label>Your comment: </label>
+                    <br />
+                    <textarea @bind="message"></textarea>
+                </div>
+                <div class="input-box">
+                    <label>Choose Avatar</label>
+                    <br />
+                    <br />
+
+                    <div class="image_choice_container">
+
+                        @foreach (var o in imagePaths)
+                        {
+                            <div class="img_choice_container">
+                                <label class="avatar_choice" @onclick="@(e => ChangeAvatar(o.Id))">
+                                    <input type="radio" name="test" value="small" checked>
+                                    <img class="choose_avatar" src="@o.ImgPath">
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="input-box">
+                    <button class="btn" @onclick="CreateComment">Create Comment</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="component_panel">
+            <div class="component_panel_container">
+                <div class="title">
+                    <h1>Custom login page</h1>
+                </div>
+
+                <div class="description">
+                    <p>This is custom register page. </p>
+
+                    <p>Person who would will manage website is able to change color scheme. Can as well change password validation rules and if user needs to give address or phone number.</p>
+
+                    <p>User of the page can create account. Input of the user is going to be validated by server and if evrything is going to be fine user is going to be added to database. </p>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <h4>Change color scheme</h4>
+
+                        <div class="choice_check_boxes">
+
+                            <div @onclick="@(e => ChangeColorScheme(1))" class="color_scheme_option">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 70.87 70.87">
+                                    <title>Color_sheme1</title>
+                                    <g id="Warstwa_2" data-name="Warstwa 2">
+                                        <g id="Warstwa_1-2" data-name="Warstwa 1">
+                                            <g>
+                                                <rect x="9.85" y="15.83" width="20.83" height="20.83" style="fill: #27437b;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="39.34" y="15.83" width="20.83" height="20.83" style="fill: #6182c1;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="25.02" y="40.35" width="20.83" height="20.83" style="fill: #f8f8f8;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <circle cx="35.44" cy="35.44" r="34.94" style="fill: none;stroke: #231f20;stroke-miterlimit: 10" />
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <div @onclick="@(e => ChangeColorScheme(2))" class="color_scheme_option">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 70.87 70.87">
+                                    <title>color_scheme_2</title>
+                                    <g id="Warstwa_2" data-name="Warstwa 2">
+                                        <g id="Warstwa_1-2" data-name="Warstwa 1">
+                                            <g>
+                                                <rect x="9.85" y="15.83" width="20.83" height="20.83" style="fill: #8a2d91;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="40.61" y="15.83" width="20.83" height="20.83" style="fill: #a43a95;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="25.02" y="41.4" width="20.83" height="20.83" style="fill: #f8f8f8;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <circle cx="35.44" cy="35.44" r="34.94" style="fill: none;stroke: #231f20;stroke-miterlimit: 10" />
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <div @onclick="@(e => ChangeColorScheme(3))" class="color_scheme_option">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 70.87 70.87">
+                                    <title>color_scheme_3</title>
+                                    <g id="Warstwa_2" data-name="Warstwa 2">
+                                        <g id="Warstwa_1-2" data-name="Warstwa 1">
+                                            <g>
+                                                <rect x="9.85" y="15.83" width="20.83" height="20.83" style="fill: #454952;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="40.61" y="15.83" width="20.83" height="20.83" style="fill: #868d9d;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="25.02" y="41.4" width="20.83" height="20.83" style="fill: #f8f8f8;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <circle cx="35.44" cy="35.44" r="34.94" style="fill: none;stroke: #231f20;stroke-miterlimit: 10" />
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <div @onclick="@(e => ChangeColorScheme(4))" class="color_scheme_option">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 70.87 70.87">
+                                    <title>color_scheme_4</title>
+                                    <g id="Warstwa_2" data-name="Warstwa 2">
+                                        <g id="Warstwa_1-2" data-name="Warstwa 1">
+                                            <g>
+                                                <rect x="9.85" y="15.83" width="20.83" height="20.83" style="fill: #ebebeb;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="40.61" y="15.83" width="20.83" height="20.83" style="fill: #fff;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="25.02" y="41.4" width="20.83" height="20.83" style="fill: #1a1a1a;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <circle cx="35.44" cy="35.44" r="34.94" style="fill: none;stroke: #231f20;stroke-miterlimit: 10" />
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <div @onclick="@(e => ChangeColorScheme(5))" class="color_scheme_option">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 70.87 70.87">
+                                    <title>color_scheme_5</title>
+                                    <g id="Warstwa_2" data-name="Warstwa 2">
+                                        <g id="Warstwa_1-2" data-name="Warstwa 1">
+                                            <g>
+                                                <rect x="9.85" y="15.83" width="20.83" height="20.83" style="fill: #73bf44;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="40.61" y="15.83" width="20.83" height="20.83" style="fill: #0c8441;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="25.02" y="41.4" width="20.83" height="20.83" style="fill: #f8f8f8;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <circle cx="35.44" cy="35.44" r="34.94" style="fill: none;stroke: #231f20;stroke-miterlimit: 10" />
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <div @onclick="@(e => ChangeColorScheme(6))" class="color_scheme_option">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 70.87 70.87">
+                                    <title>color_scheme_6</title>
+                                    <g id="Warstwa_2" data-name="Warstwa 2">
+                                        <g id="Warstwa_1-2" data-name="Warstwa 1">
+                                            <g>
+                                                <rect x="9.85" y="15.83" width="20.83" height="20.83" style="fill: #ed184a;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="40.61" y="15.83" width="20.83" height="20.83" style="fill: #af1f23;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="25.02" y="41.4" width="20.83" height="20.83" style="fill: #f8f8f8;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <circle cx="35.44" cy="35.44" r="34.94" style="fill: none;stroke: #231f20;stroke-miterlimit: 10" />
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+
+
+                            <div @onclick="@(e => ChangeColorScheme(7))" class="color_scheme_option">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 70.87 70.87">
+                                    <title>color_scheme_7</title>
+                                    <g id="Warstwa_2" data-name="Warstwa 2">
+                                        <g id="Warstwa_1-2" data-name="Warstwa 1">
+                                            <g>
+                                                <rect x="9.85" y="15.83" width="20.83" height="20.83" style="fill: #f8ec24;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="40.61" y="15.83" width="20.83" height="20.83" style="fill: #cab72e;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <rect x="25.02" y="41.4" width="20.83" height="20.83" style="fill: #f8f8f8;stroke: #231f20;stroke-miterlimit: 10" />
+                                                <circle cx="35.44" cy="35.44" r="34.94" style="fill: none;stroke: #231f20;stroke-miterlimit: 10" />
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@code{
+
+
+
+
+    /// <summary>
+    /// This class will determine login component
+    /// </summary>
+    public class RegisterComponent
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string ColorScheme { get; set; }
+
+        /// <summary>
+        /// Will determine how many characters username must have
+        /// </summary>
+        public int MinUserNameCharacters { get; set; }
+
+        /// <summary>
+        /// Will determine how many unique chars password must have
+        /// </summary>
+        public int NumberOfPasswordUniqueChar { get; set; }
+
+        /// <summary>
+        /// Will determine how many number chars password must have
+        /// </summary>
+        public int NumberOfPasswordNumericChar { get; set; }
+
+
+        /// <summary>
+        /// Will determine if user needs to give adress
+        /// </summary>
+        public bool RequiresAddress { get; set; }
+
+        /// <summary>
+        /// Will determine if user needs to give phone number
+        /// </summary>
+        public bool RequiresPhoneNumber { get; set; }
+
+
+        public RegisterComponent() { }
+    }
+
+
+
+    //Declaring comment object
+    /// <summary>
+    /// This class will be used to create comment object
+    /// </summary>
+    public class Comment
+    {
+        public int Id { get; set; }
+        public int Like { get; set; }
+        public int Dislike { get; set; }
+        public string Name { get; set; }
+        public string Message { get; set; }
+        public string ImgPath { get; set; }
+        public string Posted { get; set; }
+
+        /// <summary>
+        /// This class will controll if edit box need to be displayed
+        /// </summary>
+        public string DisplayEdit { get; set; }
+
+        /// <summary>
+        /// When comment is edited it will hide the oryginal one
+        /// </summary>
+        public string DisplayComment { get; set; }
+
+        /// <summary>
+        /// This parameter will bind Ip Address to the coment so only creator of it can edit or delete it
+        /// When Implemented it needs to be changed to users Id comming from database
+        /// </summary>
+        public string CreatorsIP { get; set; }
+
+        public bool BeenEdited { get; set; }
+
+        public List<string> IpLikes { get; set; }
+        public List<string> IpDisLikes { get; set; }
+
+
+        public Comment()
+        {
+            Like = 0;
+            Dislike = 0;
+            IpLikes = new List<string>();
+            IpDisLikes = new List<string>();
+            Posted = DateTime.Now.ToString();
+            DisplayComment = "display_block";
+            DisplayEdit = "display_none_2";
+        }
+    }
+
+    public class ImagePath
+    {
+        public int Id { get; set; }
+        public string ImgPath { get; set; }
+
+        public ImagePath()
+        {
+        }
+    }
+
+    //Declaring variables
+
+    /// <summary>
+    /// Dummy list for storing comments data (It is needed to be changed with database when implementing)
+    /// </summary>
+    protected List<Comment> comments = new List<Comment>();
+
+    /// <summary>
+    /// Mock data for image paths. When implementing change with database.
+    /// </summary>
+    protected List<ImagePath> imagePaths = new List<ImagePath>() { };
+
+    /// <summary>
+    /// String for user name (It needs to be changed with user data if it is not a guest)
+    /// </summary>
+    [Parameter]
+    public string name { get; set; }
+    [Parameter]
+    public string edit_name { get; set; }
+
+    /// <summary>
+    /// This variable is for user comment
+    /// </summary>
+    [Parameter]
+    public string message { get; set; }
+    [Parameter]
+    public string edit_message { get; set; }
+
+    /// <summary>
+    /// This will display error message if input is incorect
+    /// </summary>
+    protected string error_message = "";
+
+    /// <summary>
+    /// This will link to image path when choosing
+    /// </summary>
+    protected string img_path = "../CommentsImages/1.png";
+    protected string edit_img_path = "";
+
+    /// <summary>
+    /// This parameter will store Ip Address of current client
+    /// </summary>
+    protected string Client_IP = "";
+
+    //Color sheme declaration
+    protected string ActualScheme = "Scheme_1";
+
+    /// <summary>
+    /// Function will change color schemes of the login component
+    /// </summary>
+    /// <param name="choice"></param>
+    public void ChangeColorScheme(int choice)
+    {
+        switch (choice)
+        {
+            case 1: { ActualScheme = "Scheme_1"; break; }
+            case 2: { ActualScheme = "Scheme_2"; break; }
+            case 3: { ActualScheme = "Scheme_3"; break; }
+            case 4: { ActualScheme = "Scheme_4"; break; }
+            case 5: { ActualScheme = "Scheme_5"; break; }
+            case 6: { ActualScheme = "Scheme_6"; break; }
+            case 7: { ActualScheme = "Scheme_7"; break; }
+        }
+    }
+
+
+
+    //Declaring functionality
+
+    /// <summary>
+    /// This function will get ip addres when initalized and it will populate mock avatar data
+    /// </summary>
+    protected override async Task OnInitializedAsync()
+    {
+        //Get Ip address
+        Client_IP = GetIPAddress();
+
+        //Populate mock avatar data
+        ImagePath p1 = new ImagePath();
+        p1.Id = 0;
+        p1.ImgPath = "../CommentsImages/1.png";
+        ImagePath p2 = new ImagePath();
+        p2.Id = 1;
+        p2.ImgPath = "../CommentsImages/2.png";
+        ImagePath p3 = new ImagePath();
+        p3.Id = 2;
+        p3.ImgPath = "../CommentsImages/3.png";
+        ImagePath p4 = new ImagePath();
+        p4.Id = 3;
+        p4.ImgPath = "../CommentsImages/4.png";
+
+        imagePaths.Add(p1);
+        imagePaths.Add(p2);
+        imagePaths.Add(p3);
+        imagePaths.Add(p4);
+
+        //Create Mock Comments
+        Comment c1 = new Comment();
+        c1.CreatorsIP = "11111";
+        c1.Dislike = 2;
+        c1.Id = 0;
+        c1.ImgPath = "../CommentsImages/3.png";
+        c1.Like = 15;
+        c1.Message = "Wow this place is amazing. I would like to stay longer! <3";
+        c1.Name = "Kiara";
+        c1.Posted = "2020.03.02 22:30";
+
+        Comment c2 = new Comment();
+        c2.CreatorsIP = "11143243211";
+        c2.Dislike = 0;
+        c2.Id = 1;
+        c2.ImgPath = "../CommentsImages/1.png";
+        c2.Like = 4;
+        c2.Message = "Hi guys, lets know each other.";
+        c2.Name = "Daniel";
+        c2.Posted = "2020.03.01 11:30";
+
+        comments.Add(c1);
+        comments.Add(c2);
+    }
+
+    /// <summary>
+    /// This function will find IP Address of user
+    /// </summary>
+    /// <returns>IP Address of Client</returns>
+    public string GetIPAddress()
+    {
+        IPHostEntry Host = default(IPHostEntry);
+        string Hostname = null;
+        string IPAddress = "";
+        Hostname = System.Environment.MachineName;
+        Host = Dns.GetHostEntry(Hostname);
+        foreach (IPAddress IP in Host.AddressList)
+        {
+            if (IP.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+            {
+                IPAddress = Convert.ToString(IP);
+            }
+        }
+        return IPAddress;
+    }
+
+    /// <summary>
+    /// This function will change avatar for comment. When implementing change it with user avatar
+    /// </summary>
+    protected void ChangeAvatar(int id)
+    {
+        img_path = imagePaths[id].ImgPath;
+    }
+
+    /// <summary>
+    /// Edit Photopath
+    /// </summary>
+    protected void ChangeAvatarEdit(int id)
+    {
+        edit_img_path = imagePaths[id].ImgPath;
+    }
+
+    ///<summary>
+    ///This function will create comment and add it to memory storage
+    /// </summary>
+    protected void CreateComment()
+    {
+        bool no_error = true;
+
+        if (name == "" && message == "")
+        {
+            error_message = "Please enter your name and write your comment!";
+            no_error = false;
+        }
+        else if (name == "")
+        {
+            error_message = "Please enter your name!";
+            no_error = false;
+        }
+        else if (message == "")
+        {
+            error_message = "Please write your comment!";
+            no_error = false;
+        }
+
+        if (no_error == true)
+        {
+            //o = object
+            Comment o = new Comment();
+            if (comments.Count == 0)
+            {
+                o.Id = 0;
+                o.Name = name;
+                o.Message = message;
+                o.ImgPath = img_path;
+                o.CreatorsIP = GetIPAddress();
+            }
+            else
+            {
+                o.Id = comments.Count;
+                o.Name = name;
+                o.Message = message;
+                o.ImgPath = img_path;
+                o.CreatorsIP = GetIPAddress();
+            }
+
+            comments.Add(o);
+            name = "";
+            message = "";
+        }
+
+    }
+    /// <summary>
+    /// This function will delete comment from memory storage by its Id
+    /// </summary>
+    protected void DeleteComment(int id)
+    {
+        if (comments.Count != 0)
+        {
+            comments.RemoveAt(id);
+            for (int i = 0; i < comments.Count; i++)
+            {
+                comments[i].Id = i;
+            }
+        }
+    }
+    /// <summary>
+    /// This function will add (+1) property and it will store it to database
+    /// </summary>
+    protected void LikeComment(int id)
+    {
+        if (comments.Count != 0)
+        {
+            //This will check if user alredy liked
+            //I'm using here Ip address method but it can be exchangeble with user ID
+            string UserIpAddress = GetIPAddress();
+            bool been_liked = false;
+            List<string> c = new List<string>();
+
+            if (comments[id].IpLikes.Count != 0)
+            {
+                c = comments[id].IpLikes;
+                for (int i = 0; i < c.Count; i++)
+                {
+                    if (c[i] == UserIpAddress)
+                    {
+                        been_liked = true;
+                    }
+                }
+            }
+            //If user with this ip address has not been liked then like is added
+            if (been_liked != true)
+            {
+                comments[id].Like = comments[id].Like + 1;
+                c.Add(UserIpAddress);
+                comments[id].IpLikes = c;
+
+                //If user alredy disliked change if for like
+                if (comments[id].IpDisLikes.Count != 0)
+                {
+                    c = comments[id].IpDisLikes;
+
+                    for (int i = 0; i < c.Count; i++)
+                    {
+                        if (c[i] == UserIpAddress)
+                        {
+                            c.RemoveAt(i);
+                            comments[id].Dislike = comments[id].Dislike - 1;
+                            comments[id].IpDisLikes = c;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// This function will add (+1) property and it will store it to database
+    /// </summary>
+    protected void DislikeComment(int id)
+    {
+        if (comments.Count != 0)
+        {
+            //This will check if user alredy liked
+            //I'm using here Ip address method but it can be exchangeble with user ID
+            string UserIpAddress = GetIPAddress();
+            bool been_disliked = false;
+            List<string> c = new List<string>();
+
+            if (comments[id].IpDisLikes.Count != 0)
+            {
+                c = comments[id].IpDisLikes;
+                for (int i = 0; i < c.Count; i++)
+                {
+                    if (c[i] == UserIpAddress)
+                    {
+                        been_disliked = true;
+                    }
+                }
+            }
+            //If user with this ip address has not been liked then like is added
+            if (been_disliked != true)
+            {
+                comments[id].Dislike += 1;
+                c.Add(UserIpAddress);
+                comments[id].IpDisLikes = c;
+
+                //If user alredy liked change if for dislike
+                c = comments[id].IpLikes;
+
+                if (comments[id].IpLikes.Count != 0)
+                {
+                    for (int i = 0; i < c.Count; i++)
+                    {
+                        if (c[i] == UserIpAddress)
+                        {
+                            c.RemoveAt(i);
+                            comments[id].Like -= 1;
+                            comments[id].IpLikes = c;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    protected void ToggleEditWindow(int id)
+    {
+        if (Client_IP == comments[id].CreatorsIP)
+        {
+            if (comments[id].DisplayEdit == "display_none_2")
+            {
+                comments[id].DisplayEdit = "display_block";
+                comments[id].DisplayComment = "display_none_2";
+            }
+            else
+            {
+                comments[id].DisplayEdit = "display_none_2";
+                comments[id].DisplayComment = "display_block";
+            }
+        }
+    }
+    /// <summary>
+    /// This function will edit comment taken from memory
+    /// </summary>
+    protected void EditComment(int id)
+    {
+        comments[id].BeenEdited = true;
+        comments[id].Message = edit_message;
+        comments[id].Name = edit_name;
+        comments[id].Posted = DateTime.Now.ToString();
+        comments[id].DisplayEdit = "display_none_2";
+        comments[id].DisplayComment = "display_block";
+
+        if (edit_img_path != "" && edit_img_path != null)
+        {
+            comments[id].ImgPath = edit_img_path;
+        }
+        else
+        {
+            comments[id].ImgPath = comments[id].ImgPath;
+        }
+
+    }
+
+}

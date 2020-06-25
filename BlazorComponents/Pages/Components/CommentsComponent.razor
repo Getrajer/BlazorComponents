@@ -8,145 +8,148 @@
 
 <div class="component">
     <div class="component_container">
-
-        <div class="comment_program">
-            <div class="comments_container">
-                @foreach (var c in comments)
-                {
-                <div class="comment_container @c.DisplayComment">
-
-                    <div class="comment_box">
-                        @c.Message
-                    </div>
-
-                    <div class="user_container">
-                        <div class="user_box1">
-                            <div class="img_container">
-                                <img src="@c.ImgPath" />
-                            </div>
-                        </div>
-                        <div class="user_box2">
-                            <p class="name"> @c.Name </p>
-                            @if (c.BeenEdited == true)
-                            {
-                                <p><span class="bold">Edited:</span> @c.Posted</p>
-                            }
-                            else
-                            {
-                                <p><span class="bold">Posted:</span> @c.Posted</p>
-                            }
-                        </div>
-
-                        <div class="rates">
-                            <div class="rate_box user_box3">
-                                <p>Likes: @c.Like</p>
-                                <button class="rate_btn" @onclick="@(e => LikeComment(c.Id))"><i class="fa fa-thumbs-up"></i></button>
-                            </div>
-                            <div class="rate_box">
-                                <p>Dislikes: @c.Dislike</p>
-                                <button class="rate_btn" @onclick="@(e => DislikeComment(c.Id))"><i class="fa fa-thumbs-down"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    @if (Client_IP == c.CreatorsIP)
+        <div id="@ActualScheme">
+            <div class="comment_program">
+                <div class="comments_container">
+                    @foreach (var c in comments)
                     {
-                        <div class="comment_btn_box">
-                            <button class="btn" @onclick="@(e => DeleteComment(c.Id))">Delete Comment</button>
-                        </div>
-                    }
+                        <div class="comment_container @c.DisplayComment">
 
+                            <div class="comment_box">
+                                @c.Message
+                            </div>
 
-                    @if (Client_IP == c.CreatorsIP)
-                    {
-                        @if (comments[c.Id].DisplayEdit == "display_none_2")
-                        {
-                            <div class="comment_btn_box">
-                                <button class="btn" @onclick="@(e => ToggleEditWindow(c.Id))">Edit Comment</button>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="comment_btn_box">
-                                <button class="btn" @onclick="@(e => ToggleEditWindow(c.Id))">Cancel</button>
-                            </div>
-                        }
-                    }
-
-                </div>
-
-
-                    <div class="@c.DisplayEdit">
-                        <div class="edit_comment_container">
-                            <div>
-                                @error_message
-                            </div>
-                            <div class="input-box">
-                                <label>Name: </label><br />
-                                <input placeholder="@c.Name" @bind="edit_name" />
-                            </div>
-                            <div class="input-box">
-                                <label>Your comment: </label><br />
-                                <textarea placeholder="@c.Message" @bind="edit_message"></textarea>
-                            </div>
-                            <div class="input-box">
-                                @foreach (var o in imagePaths)
+                            <div class="user_container">
+                                <div class="user_box1">
+                                    <div class="img_container">
+                                        <img src="@c.ImgPath" />
+                                    </div>
+                                </div>
+                                <div class="user_box2">
+                                    <p class="name"> @c.Name </p>
+                                    @if (c.BeenEdited == true)
+                                    {
+                                        <p><span class="bold">Edited:</span> @c.Posted</p>
+                                    }
+                                    else
+                                    {
+                                        <p><span class="bold">Posted:</span> @c.Posted</p>
+                                    }
+                                </div>
+                                @if (comments_rating == true)
                                 {
-                                    <label @onclick="@(e => ChangeAvatarEdit(o.Id))">
-                                        <input type="radio" name="test" value="small" checked>
-                                        <img src="@o.ImgPath">
-                                    </label>
+                                    <div class="rates">
+                                        <div class="rate_box user_box3">
+                                            <p>Likes: @c.Like</p>
+                                            <button class="rate_btn" @onclick="@(e => LikeComment(c.Id))"><i class="fa fa-thumbs-up"></i></button>
+                                        </div>
+                                        <div class="rate_box">
+                                            <p>Dislikes: @c.Dislike</p>
+                                            <button class="rate_btn" @onclick="@(e => DislikeComment(c.Id))"><i class="fa fa-thumbs-down"></i></button>
+                                        </div>
+                                    </div>
                                 }
                             </div>
-                            <div class="comment_btn_box">
-                                <button class="btn" @onclick="@(e => EditComment(c.Id))">Edit</button>
+
+                            @if (Client_IP == c.CreatorsIP)
+                            {
+                                <div class="comment_btn_box">
+                                    <button class="btn" @onclick="@(e => DeleteComment(c.Id))">Delete Comment</button>
+                                </div>
+                            }
+
+
+                            @if (Client_IP == c.CreatorsIP)
+                            {
+                                @if (comments[c.Id].DisplayEdit == "display_none_2")
+                                {
+                                    <div class="comment_btn_box">
+                                        <button class="btn" @onclick="@(e => ToggleEditWindow(c.Id))">Edit Comment</button>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="comment_btn_box">
+                                        <button class="btn" @onclick="@(e => ToggleEditWindow(c.Id))">Cancel</button>
+                                    </div>
+                                }
+                            }
+
+                        </div>
+
+
+                        <div class="@c.DisplayEdit">
+                            <div class="edit_comment_container">
+                                <div>
+                                    @error_message
+                                </div>
+                                <div class="input-box">
+                                    <label>Name: </label><br />
+                                    <input placeholder="@c.Name" @bind="edit_name" />
+                                </div>
+                                <div class="input-box">
+                                    <label>Your comment: </label><br />
+                                    <textarea placeholder="@c.Message" @bind="edit_message"></textarea>
+                                </div>
+                                <div class="input-box">
+                                    @foreach (var o in imagePaths)
+                                    {
+                                        <label @onclick="@(e => ChangeAvatarEdit(o.Id))">
+                                            <input type="radio" name="test" value="small" checked>
+                                            <img src="@o.ImgPath">
+                                        </label>
+                                    }
+                                </div>
+                                <div class="comment_btn_box">
+                                    <button class="btn" @onclick="@(e => EditComment(c.Id))">Edit</button>
+                                </div>
                             </div>
                         </div>
+                    }
+                </div>
+
+
+                <div class="add_comment_container">
+                    <div class="title_add_comment">
+                        <h2>Add comment</h2>
                     </div>
-                }
-            </div>
 
-
-            <div class="add_comment_container">
-                <div class="title_add_comment">
-                    <h2>Add comment</h2>
-                </div>
-
-                <div class="error">
-                    @error_message
-                </div>
-
-                <div class="input-box">
-                    <label>Name: </label>
-                    <br />
-                    <input @bind="name" />
-                </div>
-                <div class="input-box">
-                    <label>Your comment: </label>
-                    <br />
-                    <textarea @bind="message"></textarea>
-                </div>
-                <div class="input-box">
-                    <label>Choose Avatar</label>
-                    <br />
-                    <br />
-
-                    <div class="image_choice_container">
-
-                        @foreach (var o in imagePaths)
-                        {
-                            <div class="img_choice_container">
-                                <label class="avatar_choice" @onclick="@(e => ChangeAvatar(o.Id))">
-                                    <input type="radio" name="test" value="small" checked>
-                                    <img class="choose_avatar" src="@o.ImgPath">
-                                </label>
-                            </div>
-                        }
+                    <div class="error">
+                        @error_message
                     </div>
-                </div>
 
-                <div class="input-box">
-                    <button class="btn" @onclick="CreateComment">Create Comment</button>
+                    <div class="input-box">
+                        <label>Name: </label>
+                        <br />
+                        <input @bind="name" />
+                    </div>
+                    <div class="input-box">
+                        <label>Your comment: </label>
+                        <br />
+                        <textarea @bind="message"></textarea>
+                    </div>
+                    <div class="input-box">
+                        <label>Choose Avatar</label>
+                        <br />
+                        <br />
+
+                        <div class="image_choice_container">
+
+                            @foreach (var o in imagePaths)
+                            {
+                                <div class="img_choice_container">
+                                    <label class="avatar_choice" @onclick="@(e => ChangeAvatar(o.Id))">
+                                        <input type="radio" name="test" value="small" checked>
+                                        <img class="choose_avatar" src="@o.ImgPath">
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="input-box">
+                        <button class="btn" @onclick="CreateComment">Create Comment</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -158,11 +161,11 @@
                 </div>
 
                 <div class="description">
-                    <p>This is custom register page. </p>
+                    <p>This is cutom comments component.</p>
+                    <p>User is able to create, delete and edit comments. User is able to rate comments of diffrent users.</p>
+                    <p>Administrator of the website is able to change style, enable disable ratings, delete comments.</p>
+                    <p>In this version user is beeing checked by Ip address (<span class="bold">Your IP Adress is: @Client_IP</span>), so users got restricted access to the other users comments.</p>
 
-                    <p>Person who would will manage website is able to change color scheme. Can as well change password validation rules and if user needs to give address or phone number.</p>
-
-                    <p>User of the page can create account. Input of the user is going to be validated by server and if evrything is going to be fine user is going to be added to database. </p>
                 </div>
 
                 <div class="options">
@@ -286,6 +289,22 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="option">
+                    <h4>Enable/Disable rate system</h4>
+                    <div class="button_container">
+                        <button @onclick="EnableDisableRating">@comments_rating_btn</button>
+                    </div>
+                </div>
+
+                <h4>Console</h4>
+
+                <div class="console">
+                    <div class="console_container">
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -477,16 +496,16 @@
         //Populate mock avatar data
         ImagePath p1 = new ImagePath();
         p1.Id = 0;
-        p1.ImgPath = "../CommentsImages/1.png";
+        p1.ImgPath = "../CommentsImages/1.jpg";
         ImagePath p2 = new ImagePath();
         p2.Id = 1;
-        p2.ImgPath = "../CommentsImages/2.png";
+        p2.ImgPath = "../CommentsImages/2.jpg";
         ImagePath p3 = new ImagePath();
         p3.Id = 2;
-        p3.ImgPath = "../CommentsImages/3.png";
+        p3.ImgPath = "../CommentsImages/3.jpg";
         ImagePath p4 = new ImagePath();
         p4.Id = 3;
-        p4.ImgPath = "../CommentsImages/4.png";
+        p4.ImgPath = "../CommentsImages/4.jpg";
 
         imagePaths.Add(p1);
         imagePaths.Add(p2);
@@ -498,7 +517,7 @@
         c1.CreatorsIP = "11111";
         c1.Dislike = 2;
         c1.Id = 0;
-        c1.ImgPath = "../CommentsImages/3.png";
+        c1.ImgPath = "../CommentsImages/3.jpg";
         c1.Like = 15;
         c1.Message = "Wow this place is amazing. I would like to stay longer! <3";
         c1.Name = "Kiara";
@@ -508,14 +527,58 @@
         c2.CreatorsIP = "11143243211";
         c2.Dislike = 0;
         c2.Id = 1;
-        c2.ImgPath = "../CommentsImages/1.png";
+        c2.ImgPath = "../CommentsImages/1.jpg";
         c2.Like = 4;
         c2.Message = "Hi guys, lets know each other.";
         c2.Name = "Daniel";
         c2.Posted = "2020.03.01 11:30";
 
+
+        Comment c3 = new Comment();
+        c3.CreatorsIP = "11433243211";
+        c3.Dislike = 0;
+        c3.Id = 2;
+        c3.ImgPath = "../CommentsImages/4.jpg";
+        c3.Like = 5;
+        c3.Message = "Amazing content. Keep the amazing work!";
+        c3.Name = "Amanda";
+        c3.Posted = "2020.03.02 12:30";
+
+        Comment c4 = new Comment();
+        c4.CreatorsIP = "11433243211";
+        c4.Dislike = 0;
+        c4.Id = 3;
+        c4.ImgPath = "../CommentsImages/2.jpg";
+        c4.Like = 10;
+        c4.Message = "Hey I am new here, but I find this place amazing!";
+        c4.Name = "Tom";
+        c4.Posted = "2020.03.06 12:00";
+
         comments.Add(c1);
         comments.Add(c2);
+        comments.Add(c3);
+        comments.Add(c4);
+    }
+
+    //Rating comments controll variables
+    protected bool comments_rating = true;
+    protected string comments_rating_btn = "Disable";
+
+    /// <summary>
+    /// This vunction will enable or disable rating of comments (likes and dislikes)
+    /// </summary>
+    public void EnableDisableRating()
+    {
+        if(comments_rating == false)
+        {
+            comments_rating = true;
+            comments_rating_btn = "Disable";
+        }
+        else
+        {
+            comments_rating = false;
+            comments_rating_btn = "Enable";
+        }
     }
 
     /// <summary>

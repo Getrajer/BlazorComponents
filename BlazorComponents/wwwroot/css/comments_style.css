@@ -4,11 +4,20 @@ h4 {
     margin: 0;
 }
 
+p{
+    margin: 0;
+    padding: 0;
+}
+
 .component{
     display:flex;
     justify-content:center;
     width:100%;
     padding:3em 0;
+}
+
+.bold{
+    font-weight:800;
 }
 
 .component .component_container{
@@ -22,6 +31,7 @@ h4 {
     display:flex;
     justify-content:center;
     width:100%;
+    height:735px;
 }
 
 .component_panel .component_panel_container{
@@ -202,7 +212,6 @@ button:focus{
 }
 
 .comment_program .add_comment_container {
-    background-color: black;
     margin-top:3em;
 }
 
@@ -218,17 +227,14 @@ button:focus{
 
 .comment_program .title_add_comment{
     text-align:center;
-    background-color:white;
-    color:black;
     letter-spacing:5px;
-    font-weight: 600;
     padding: 0.5em 0;
     text-transform: uppercase;
-    border:3px solid black;
 }
 
 .comment_program h2{
     margin: 0;
+    font-weight: 700;
     padding: 0;
 }
 
@@ -237,11 +243,16 @@ button:focus{
     height: 98px;
 }
 
+.comment_program .input-box{
+    padding: 1em 2em;
+}
+
 .comment_program input, textarea {
     border: none;
     padding: 0.5em;
     background-color: rgba(160, 161, 167, 0.60);
     border-radius: 0.2em;
+    width:100%;
     color:black;
     transition: 0.5s;
 }
@@ -253,7 +264,6 @@ button:focus{
 .comment_program textarea {
     height: 150px;
     width:100%;
-    max-width: 300px;
 }
 
 .comment_program .btn {
@@ -275,7 +285,6 @@ button:focus{
 .comment_program .line {
     width: 100%;
     height: 6px;
-    background-color: rgb(0, 0, 0);
 }
 
 .comment_program .user_container {
@@ -283,8 +292,6 @@ button:focus{
     display: grid;
     grid-template-columns: 160px 200px auto;
     padding: 1em;
-    color:white;
-    background-color: black;
     margin-bottom: 2em;
 }
 
@@ -323,7 +330,6 @@ button:focus{
 
 .comment_program .comment_box {
     padding: 1em;
-    border: 2px solid black;
     font-size: 1rem;
     font-weight: 400;
 }
@@ -353,14 +359,12 @@ button:focus{
     padding: 0.5em;
     border: none;
     outline: none;
-    background-color: white;
     transition: 0.5s;
 }
 
 .comment_program .rate_btn:hover {
     border: none;
     outline: none;
-    background-color: #1BB0DB;
 }
 
 .comment_program .display_none_2 {
@@ -370,3 +374,359 @@ button:focus{
 .comment_program .display_block {
     display: block !important;
 }
+
+
+/*Schemes*/
+
+/*Scheme 1 style*/
+#Scheme_1 .item_card {
+    background: rgb(30,52,96);
+    background: linear-gradient(0deg, rgba(30,52,96,1) 24%, rgba(40,67,122,1) 65%, rgba(70,118,215,1) 90%);
+    color: #f0f4fc;
+}
+
+#Scheme_1 .comment_program .user_container {
+    color: white;
+    background-color: rgba(40,67,122,1);
+}
+
+#Scheme_1 .comment_program .add_comment_container {
+    background-color: rgba(40,67,122,1);
+}
+
+#Scheme_1 .comment_program .title_add_comment {
+    background-color: white;
+    color: rgba(40,67,122,1);
+    border: 3px solid rgba(40,67,122,1);
+}
+
+#Scheme_1 .comment_program label {
+    color: #ffffff;
+}
+
+#Scheme_1 .comment_program .comment_box {
+    border: 2px solid rgba(40,67,122,1);
+}
+
+#Scheme_1 .comment_program .line {
+    background-color: rgba(40,67,122,1);
+}
+
+#Scheme_1 .comment_program .btn {
+    background-color: white;
+    color: rgba(40,67,122,1);
+}
+
+#Scheme_1 .comment_program .btn:hover {
+    background-color: #152035;
+}
+
+#Scheme_1 .comment_program .rate_btn {
+    background-color: white;
+    color: rgba(40,67,122,1);
+}
+
+#Scheme_1 .comment_program .rate_btn:hover {
+    background-color: #152035;
+}
+
+/*End of scheme 1*/
+
+/*Scheme 2 style*/
+#Scheme_2 .item_card {
+    background: rgb(30,52,96);
+    background: linear-gradient(0deg, rgba(30,52,96,1) 24%, rgba(40,67,122,1) 65%, rgba(70,118,215,1) 90%);
+    color: #f0f4fc;
+}
+
+#Scheme_2 .comment_program .user_container {
+    color: white;
+    background-color:rgba(138,43,148,1);
+}
+
+#Scheme_2 .comment_program .add_comment_container {
+    background-color: rgba(138,43,148,1);
+}
+
+#Scheme_2 .comment_program .title_add_comment {
+    background-color: white;
+    color: rgba(138,43,148,1);
+    border: 3px solid rgba(138,43,148,1);
+}
+
+#Scheme_2 .comment_program label {
+    color: #ffffff;
+}
+
+#Scheme_2 .comment_program .comment_box {
+    border: 2px solid rgba(138,43,148,1);
+}
+
+#Scheme_2 .comment_program .line {
+    background-color: rgba(138,43,148,1);
+}
+
+#Scheme_2 .comment_program .btn {
+    background-color: white;
+    color: rgba(138,43,148,1);
+}
+
+#Scheme_2 .comment_program .btn:hover {
+    background-color: #152035;
+}
+
+#Scheme_2 .comment_program .rate_btn {
+    background-color: white;
+    color: rgba(138,43,148,1);
+}
+
+#Scheme_2 .comment_program .rate_btn:hover {
+    background-color: #152035;
+}
+/*End of scheme 2*/
+
+/*Scheme 3 style*/
+#Scheme_3 .comment_program .user_container {
+    color: white;
+    background-color: rgba(42,43,46,1);
+}
+
+#Scheme_3 .comment_program .add_comment_container {
+    background-color: rgba(42,43,46,1);
+}
+
+#Scheme_3 .comment_program .title_add_comment {
+    background-color: white;
+    color: rgba(42,43,46,1);
+    border: 3px solid rgba(42,43,46,1);
+}
+
+#Scheme_3 .comment_program label {
+    color: #ffffff;
+}
+
+#Scheme_3 .comment_program .comment_box {
+    border: 2px solid rgba(42,43,46,1);
+}
+
+#Scheme_3 .comment_program .line {
+    background-color: rgba(42,43,46,1);
+}
+
+#Scheme_3 .comment_program .btn {
+    background-color: white;
+    color: rgba(42,43,46,1);
+}
+
+#Scheme_3 .comment_program .btn:hover {
+    background-color: #152035;
+}
+
+#Scheme_3 .comment_program .rate_btn {
+    background-color: white;
+    color: rgba(42,43,46,1);
+}
+
+#Scheme_3 .comment_program .rate_btn:hover {
+    background-color: #152035;
+}
+/*End of scheme 3*/
+
+/*Scheme 4 style*/
+#Scheme_4 .comment_program .user_container {
+    color: rgba(42,43,46,1);
+    border: 1px solid rgba(42,43,46,1);
+}
+
+#Scheme_4 .comment_program .add_comment_container {
+    border: 1px solid rgba(42,43,46,1);
+}
+
+#Scheme_4 .comment_program .title_add_comment {
+    background-color: white;
+    color: rgba(42,43,46,1);
+    border-bottom: 1px solid rgba(42,43,46,1);
+}
+
+#Scheme_4 .comment_program label {
+    color: #ffffff;
+}
+
+#Scheme_4 .comment_program .comment_box {
+    border: 1px solid rgba(42,43,46,1);
+}
+
+#Scheme_4 .comment_program .line {
+    background-color: rgba(42,43,46,1);
+}
+
+#Scheme_4 .comment_program .btn {
+    background-color: unset;
+    color: rgba(42,43,46,1);
+    border: 1px solid rgba(42,43,46,1);
+}
+
+#Scheme_4 .comment_program .btn:hover {
+    background-color: rgba(42,43,46,1);
+    color:white;
+}
+
+#Scheme_4 .comment_program .rate_btn {
+    border: 1px solid rgba(42,43,46,1);
+    color: rgba(42,43,46,1);
+}
+
+#Scheme_4 .comment_program .rate_btn:hover {
+    background-color: rgba(42,43,46,1);
+    color:white;
+}
+/*End of scheme 2*/
+
+/*Scheme 5 style*/
+#Scheme_5 .comment_program .user_container {
+    color: white;
+    background-color: rgb(35, 131, 96);
+}
+
+#Scheme_5 .comment_program .add_comment_container {
+    background-color: rgb(35, 131, 96);
+}
+
+#Scheme_5 .comment_program .title_add_comment {
+    background-color: white;
+    color: rgb(35, 131, 96);
+    border: 3px solid rgb(35, 131, 96);
+}
+
+#Scheme_5 .comment_program label {
+    color: #ffffff;
+}
+
+#Scheme_5 .comment_program .comment_box {
+    border: 2px solid rgb(35, 131, 96);
+}
+
+#Scheme_5 .comment_program .line {
+    background-color: rgb(35, 131, 96);
+}
+
+#Scheme_5 .comment_program .btn {
+    background-color: white;
+    color: rgb(35, 131, 96);
+}
+
+#Scheme_5 .comment_program .btn:hover {
+    background-color: #152035;
+}
+
+#Scheme_5 .comment_program .rate_btn {
+    background-color: white;
+    color: rgb(35, 131, 96);
+}
+
+#Scheme_5 .comment_program .rate_btn:hover {
+    background-color: #152035;
+}
+/*End of scheme 5*/
+
+/*Scheme 6 style*/
+#Scheme_6 .comment_program .user_container {
+    color: white;
+    background-color: rgb(163, 56, 71);
+}
+
+#Scheme_6 .comment_program .add_comment_container {
+    background-color: rgb(163, 56, 71);
+}
+
+#Scheme_6 .comment_program .title_add_comment {
+    background-color: white;
+    color: rgb(163, 56, 71);
+    border: 3px solid rgb(163, 56, 71);
+}
+
+#Scheme_6 .comment_program label {
+    color: #ffffff;
+}
+
+#Scheme_6 .comment_program .comment_box {
+    border: 2px solid rgb(163, 56, 71);
+}
+
+#Scheme_6 .comment_program .line {
+    background-color: rgb(163, 56, 71);
+}
+
+#Scheme_6 .comment_program .btn {
+    background-color: white;
+    color: rgb(163, 56, 71);
+}
+
+#Scheme_6 .comment_program .btn:hover {
+    background-color: #152035;
+}
+
+#Scheme_6 .comment_program .rate_btn {
+    background-color: white;
+    color: rgb(163, 56, 71);
+}
+
+#Scheme_6 .comment_program .rate_btn:hover {
+    background-color: #152035;
+}
+/*End of scheme 6*/
+
+/*Scheme 7 style*/
+#Scheme_7 .item_card {
+    background: rgb(112,108,55);
+    background: linear-gradient(0deg, rgba(112,108,55,1) 24%, rgba(158,155,81,1) 45%, rgba(200,190,97,1) 64%);
+    color: #f0f4fc;
+}
+
+#Scheme_7 .comment_program .user_container {
+    color: white;
+    background-color: rgb(204, 162, 62);
+}
+
+#Scheme_7 .comment_program .add_comment_container {
+    background-color:  rgb(204, 162, 62);
+}
+
+#Scheme_7 .comment_program .title_add_comment {
+    background-color: white;
+    color:  rgb(204, 162, 62);
+    border: 3px solid  rgb(204, 162, 62);
+}
+
+#Scheme_7 .comment_program label {
+    color: #ffffff;
+}
+
+#Scheme_7 .comment_program .comment_box {
+    border: 2px solid  rgb(204, 162, 62);
+}
+
+#Scheme_7 .comment_program .line {
+    background-color:  rgb(204, 162, 62);
+}
+
+#Scheme_7 .comment_program .btn {
+    background-color: white;
+    color:  rgb(204, 162, 62);
+}
+
+#Scheme_7 .comment_program .btn:hover {
+    background-color: #152035;
+}
+
+#Scheme_7 .comment_program .rate_btn {
+    background-color: white;
+    color:  rgb(204, 162, 62);
+}
+
+#Scheme_7 .comment_program .rate_btn:hover {
+    background-color: #152035;
+}
+/*End of scheme 7*/
+
+/*End of schemes*/

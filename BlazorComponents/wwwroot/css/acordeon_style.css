@@ -221,7 +221,8 @@ button:focus{
 .acordeon .button_container button{
     background-color: unset;
     border-radius: 3em;
-    padding: 0.3em;
+    width:40px;
+    height:40px;
     font-size:1.3rem;
     font-weight: 900;
     transition: 0.5s;

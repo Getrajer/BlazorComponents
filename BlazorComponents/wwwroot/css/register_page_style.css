@@ -231,7 +231,7 @@ button:focus{
 .register .error_info{
     padding: 0.2em 0;
     color:red;
-    height: 30px;
+    height: 20px;
 }
 
 .register .pin_choice{

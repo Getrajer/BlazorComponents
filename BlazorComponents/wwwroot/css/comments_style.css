@@ -433,12 +433,6 @@ button:focus{
 /*End of scheme 1*/
 
 /*Scheme 2 style*/
-#Scheme_2 .item_card {
-    background: rgb(30,52,96);
-    background: linear-gradient(0deg, rgba(30,52,96,1) 24%, rgba(40,67,122,1) 65%, rgba(70,118,215,1) 90%);
-    color: #f0f4fc;
-}
-
 #Scheme_2 .comment_program .user_container {
     color: white;
     background-color:rgba(138,43,148,1);
@@ -520,6 +514,7 @@ button:focus{
 
 #Scheme_3 .comment_program .btn:hover {
     background-color: #152035;
+    color:white;
 }
 
 #Scheme_3 .comment_program .rate_btn {
@@ -529,6 +524,7 @@ button:focus{
 
 #Scheme_3 .comment_program .rate_btn:hover {
     background-color: #152035;
+    color:white;
 }
 /*End of scheme 3*/
 

@@ -24,13 +24,14 @@ p{
     max-width: 1100px;
     display:grid;
     grid-template-columns: 1fr;
+    grid-gap: 2em;
 }
 
 .component_panel{
     display:flex;
     justify-content:center;
     width:100%;
-    height:490px;
+    height:715px;
 }
 
 .component_panel .component_panel_container{
@@ -141,6 +142,36 @@ p{
     background-color: rgba(40, 67, 122, 0.50);
 }
 
+.component_panel .stock{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+    padding-bottom:1em;
+}
+
+.component_panel .stock label{
+    text-transform:unset;
+    letter-spacing:unset;
+}
+
+.component_panel .stock .item{
+    text-align:center;
+}
+
+.component_panel .stock .item button{
+    background-color:#28437a;
+    font-weight:700;
+    color: #f0f4fc;
+    padding:0.3em;
+    border:unset;
+    transition:0.5s;
+
+}
+
+.component_panel .stock .item button:hover{
+    background-color: rgb(0, 0, 0);
+}
+
 button:focus{
     outline:unset;
 }
@@ -217,7 +248,7 @@ button:focus{
 .food_order .choice_panel_container{
     width:100%;
     color:#f0f4fc;
-    padding: 0.5em 2em;
+    padding: 0.5em 3em;
     background-color:rgba(82, 44, 25, 0.65);
 }
 
@@ -251,7 +282,6 @@ button:focus{
 
 .food_order label{
     display:block;
-    letter-spacing: 5px;
     text-align:center;
     font-weight:700;
 }
@@ -274,7 +304,7 @@ button:focus{
 }
 
 .food_order .add_order{
-    padding:2em 6em;
+    padding:2em 7em;
 }
 
 .food_order .add_order h4{
@@ -290,6 +320,19 @@ button:focus{
 .food_order .ordered_foods{
     display:grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.food_order .ordered_foods .order{
+    padding:0.2em 0.3em;
+    text-align:center;
+}
+
+.food_order .ordered_foods .button_container{
+    padding: 0.2em 0.5em;
+}
+
+.food_order .ordered_foods button{
+    font-size: 1rem;
 }
 
 .food_order .title{
@@ -312,7 +355,15 @@ button:focus{
     padding: 0.5em 0;
  }
 .food_order .checkout .button_container{
-    padding: 0 6em;
+    padding: 0 7em;
 }
 
 /*End of custom food order*/
+
+.display_none{
+    display:none!important;
+}
+
+.display_block{
+    display:block;
+}
